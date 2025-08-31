@@ -1,4 +1,3 @@
-// src/api/index.ts
 import ApiSlice from "./slice";
 import EngineSlice from "./slices/engine";
 import GarageSlice from "./slices/garage";
