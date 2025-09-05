@@ -54,21 +54,6 @@ npm start
 
 The backend will run on [http://localhost:3000](http://localhost:3000).
 
-## Project Structure
-
-```
-async-race/
-├── src/
-│   ├── components/      # UI components
-│   ├── pages/           # Garage, Winners, Race pages
-│   ├── store/           # Zustand state management
-│   ├── services/        # API services (Axios)
-│   ├── App.tsx          # Root component
-│   └── main.tsx         # Entry point
-├── public/              # Static assets
-├── tailwind.config.js   # Tailwind configuration
-└── package.json
-```
 
 ## 🏆 Score
 
