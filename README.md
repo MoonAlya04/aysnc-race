@@ -1,7 +1,7 @@
 # Async Race
 
 -Repository: https://github.com/MoonAlya04/async-race.git
--Deployment: https://aysnc-rece.vercel.app/
+-Deployment: [https://aysnc-rece.vercel.app/](https://aysnc-race.vercel.app/)
 
 Async Race is a web application for managing a virtual car race. It allows users to create, update, and remove cars, start races, and view winners.
 
