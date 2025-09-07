@@ -1,5 +1,5 @@
-import ApiSlice from "../../../api/slice.ts";
-import { FailedResponse, SuccessResponse } from "../../../api/types";
+import ApiSlice from "../../slice.ts";
+import { FailedResponse, SuccessResponse } from "../../types";
 import { EngineResponse } from "./entity.ts";
 import { EngineStatus } from "./types.ts";
 

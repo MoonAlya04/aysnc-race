@@ -1,5 +1,5 @@
 import Api from "../../../../api/index.ts";
-import { EngineStatus } from "../../../../api/Slices/engine/types.ts";
+import { EngineStatus } from "../../../../api/slices/engine/types.ts";
 import { Callbacks } from "../../../../common/types";
 import { useCallback } from "react";
 

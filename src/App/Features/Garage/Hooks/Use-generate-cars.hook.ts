@@ -1,4 +1,3 @@
-
 import { useCallback } from "react";
 import useGarageActions from "./Use-garage-actions.ts";
 import useCars from "./Use-cars-hook.ts";
@@ -43,7 +42,7 @@ const getRandomColor = (): string => {
 const generateRandomCars = () => {
   const cars = [];
 
-  for (let i = 1; i <= 100; i++) {
+  for (let i = 1; i <= 10; i++) {
     const car = {
       name: getRandomCarName(),
       color: getRandomColor()

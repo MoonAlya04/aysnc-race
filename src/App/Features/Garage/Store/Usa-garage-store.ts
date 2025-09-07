@@ -1,7 +1,7 @@
 
-import { EngineResponse } from "../../../../api/Slices/engine/entity";
-import { EngineStatus } from "../../../../api/Slices/engine/types";
-import { Car } from "../../../../api/Slices/garage/entity";
+import { EngineResponse } from "../../../../api/slices/engine/entity";
+import { EngineStatus } from "../../../../api/slices/engine/types";
+import { Car } from "../../../../api/slices/garage/entity";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 

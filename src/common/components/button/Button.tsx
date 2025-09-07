@@ -1,6 +1,5 @@
-
 import React, { PropsWithChildren } from "react";
-import { IconName } from "../Icon/Icon-data";
+import { IconName } from "../Icon/Icon-data.ts";
 import Icon from "../Icon/Icon.tsx";
 
 interface Props {

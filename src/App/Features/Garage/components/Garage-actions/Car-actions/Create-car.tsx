@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import useManageGarageActions from "../../../Hooks/Use-manage-garage-actions.hook.ts";
 import ActionsForm from "./Actions-form.tsx";
-import Button from "../../../../../../common/components/Button/Button.tsx";
+import Button from "../../../../../../common/components/button/button.tsx";
 interface Props {
   onClose: () => void;
 }
@@ -12,7 +12,6 @@ function CreateCar({ onClose }: Props) {
     name: "",
     color: "#000000"
   });
-
 
   const isFieldsFilled = updateValues.name && updateValues.color;
 
@@ -26,7 +25,6 @@ function CreateCar({ onClose }: Props) {
     onClose();
   }, [isFieldsFilled, onClose, createCarAction, updateValues.color, updateValues.name]);
 
-
   return (
     <div className="bg-white p-6 flex-flex-col space-y-4 rounded-2xl">
       <div>
@@ -39,9 +37,7 @@ function CreateCar({ onClose }: Props) {
         <Button onClick={onClose}>Cancel</Button>
       </div>
     </div>
-  )
-
+  );
 }
-
 
 export default CreateCar;

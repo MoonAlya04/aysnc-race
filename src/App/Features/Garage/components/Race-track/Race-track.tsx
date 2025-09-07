@@ -3,7 +3,7 @@ import useCars from "../../Hooks/Use-cars-hook.ts";
 import Car from "../Car/Car.tsx";
 import GarageActions from "../Garage-actions/Garage-actions.tsx";
 import RaceLine from "./Race-line.tsx";
-import WinnerModal from "../../../../../App/Features/Winner/components/Modal/Winner-modal.tsx";
+import WinnerModal from "../../../Winner/components/Modal/Winner-modal.tsx";
 import Modal from "../../../../../common/components/Modal/Modal.tsx";
 import Pagination from "../../../../../common/components/Pagination/Pagination.tsx";
 import useAnnounceWinner from "../../Hooks/Use-announce-winner.hook.ts";

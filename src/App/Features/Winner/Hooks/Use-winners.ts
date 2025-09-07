@@ -1,8 +1,8 @@
 import Api from "../../../../api/index.ts";
 import { useCallback } from "react";
-import { Winner } from "../../../../api/Slices/winners/entity";
+import { Winner } from "../../../../api/slices/winners/entity.ts";
 import { Callbacks } from "../../../../common/types";
-import { GetWinnersParams } from "../../../../api/Slices/winners/types.ts";
+import { GetWinnersParams } from "../../../../api/slices/winners/types.ts";
 
 
 export default function useWinners() {

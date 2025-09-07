@@ -1,4 +1,4 @@
-import { CarCondition } from "../../../../../api/Slices/garage/types";
+import { CarCondition } from "../../../../../api/slices/garage/types";
 import React, { PropsWithChildren } from "react";
 
 interface Props {
