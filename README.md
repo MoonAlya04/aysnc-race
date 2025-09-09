@@ -1,7 +1,7 @@
 # Async Race
 
--Repository: [https://github.com/MoonAlya04/async-race.git](https://github.com/MoonAlya04/aysnc-race)
--Deployment: [https://aysnc-rece.vercel.app/](https://aysnc-race.vercel.app/)
+-Repository: https://github.com/MoonAlya04/aysnc-race
+-Deployment: https://aysnc-race.vercel.app/
 
 Async Race is a web application for managing a virtual car race. It allows users to create, update, and remove cars, start races, and view winners.
 
@@ -27,7 +27,7 @@ Async Race is a web application for managing a virtual car race. It allows users
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/MoonAlya04/async-race.git](https://github.com/MoonAlya04/aysnc-race)
+git clone https://github.com/MoonAlya04/async-race.git
 cd async-race
 ```
 
