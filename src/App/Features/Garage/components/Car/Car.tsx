@@ -1,10 +1,10 @@
 import { CarCondition } from "../../../../../api/Slices/garage/types.ts";
 import { RaceType } from "../../Store/Use-winner-store.ts";
-import CarIcon from "./Car-icon.tsx";
 import useCarAnimation from "../../Hooks/Use-car-animation.ts";
 import { Car as CarEntity } from "../../../../../api/Slices/garage/entity.ts";
 import { useManageCar } from "../../Hooks/Use-manage-car.hook.ts";
 import { EngineStatus } from "../../../../../api/Slices/engine/types.ts";
+import CarWithWindows from "./Car-icon.tsx";
 
 interface Props {
   car: CarEntity;
@@ -32,7 +32,7 @@ export default function Car({ car, winnerId, announceWinner, raceType }: Props) 
 
   return (
     <div ref={carRef} className="w-fit">
-      <CarIcon color={car.color} />
+      <CarWithWindows color={car.color} />
     </div>
   );
 }

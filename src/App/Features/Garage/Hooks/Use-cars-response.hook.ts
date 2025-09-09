@@ -1,7 +1,6 @@
-import { useCallback } from "react";
-import { Callbacks } from "../../../../common/types";
 import Api from "../../../../api/index.ts";
-
+import { Callbacks } from "../../../../common/types";
+import { useCallback } from "react";
 export function useCarsResponse() {
   const getCarsResponse = useCallback(
     async ({ page, limit, callbacks }: { page?: number; limit?: number; callbacks: Callbacks }) => {

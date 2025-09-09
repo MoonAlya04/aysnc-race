@@ -1,5 +1,6 @@
 import ApiSlice from "../../slice.ts";
 import { FailedResponse, SuccessResponse } from "../../types";
+
 import { Car, GetCarsResponse } from "./entity.ts";
 
 export default class GarageSlice extends ApiSlice {

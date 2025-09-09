@@ -1,42 +1,30 @@
-// eslint.config.js
 import js from "@eslint/js";
+import globals from "globals";
 import tseslint from "typescript-eslint";
-import react from "eslint-plugin-react";
-import reactHooks from "eslint-plugin-react-hooks";
+import pluginReact from "eslint-plugin-react";
+import pluginReactHooks from "eslint-plugin-react-hooks";
+import { defineConfig } from "eslint/config";
 
-export default [
-  js.configs.recommended,
-  ...tseslint.configs.recommended,
+export default defineConfig([
   {
-    files: ["**/*.{js,jsx,ts,tsx}"],
-    ignores: ["node_modules", "dist", "build"],
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     languageOptions: {
-      parser: tseslint.parser,
-      ecmaVersion: "latest",
-      sourceType: "module",
+      globals: globals.browser,
     },
     plugins: {
-      react,
-      "react-hooks": reactHooks,
-      "@typescript-eslint": tseslint.plugin,
+      js,
+      "react-hooks": pluginReactHooks,
     },
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      pluginReact.configs.flat.recommended,
+    ],
     rules: {
-      // React
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
-
-      // React Hooks
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-
-      // TypeScript
-      "@typescript-eslint/no-non-null-assertion": "warn",
+      "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/no-explicit-any": "warn",
     },
-    settings: {
-      react: {
-        version: "detect",
-      },
-    },
   },
-];
+]);

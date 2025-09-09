@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import axios, { AxiosError, Method } from "axios";
-import type { FailedResponse, RequestOptions, ResponseModel } from "../api/types";
 import { useCallback, useEffect, useState } from "react";
+import type { FailedResponse, RequestOptions, ResponseModel } from "../api/types";
 
 type UseApiError = { code: number; message: string };
 type UseApi<T> = {
@@ -11,75 +12,104 @@ type UseApi<T> = {
   success: boolean;
 };
 
-const API_URL = process.env.REACT_APP_API_URL ?? "";
-
+const API_URL = process.env.REACT_APP_API_URL || "";
 export default class ApiSlice {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   static baseURL: string = API_URL;
 
   static async request<T = unknown>(
     url = "",
     method: Method = "GET",
     payload: object | FormData | null = null,
-    options?: RequestOptions
+    options: RequestOptions = null
   ): Promise<ResponseModel<T>> {
     let headers: {
       Authorization?: string;
       Timezone: string;
-      "Content-Type"?: string;
+      "Content-Type": string;
     } = {
-      Timezone: String(-new Date().getTimezoneOffset() / 60)
+      Timezone: -new Date().getTimezoneOffset() / 60 + "",
+      "Content-Type": "application/json"
     };
 
-    // Add Content-Type only if not FormData
-    if (!(payload instanceof FormData)) {
-      headers["Content-Type"] = "application/json";
-    }
-
     if (options?.headers) headers = { ...headers, ...options.headers };
-
     try {
-      const rsp = await axios({
-        method,
-        url: this.baseURL + url,
-        headers,
-        data: payload || undefined,
-        responseType: "json"
-      });
+      const rsp =
+        (await axios({
+          method,
+          url: this.baseURL + url,
+          headers,
+          data: payload || undefined,
+          responseType: "json"
+        })) || ({} as ResponseModel<T>);
 
-      const totalCount: number | undefined = rsp.headers["x-total-count"] ? Number(rsp.headers["x-total-count"]) : undefined;
-
+      const totalCount: number | undefined = rsp.headers["x-total-count"];
       return {
-        data: rsp.data,
+        data: totalCount ? { data: rsp.data, totalCount } : rsp.data,
         meta: {
-          totalCount,
           error: null,
           status: rsp.status
         }
       };
-    } catch (err: unknown) {
-      const axiosErr = err as AxiosError<{ message?: string }>;
-
-      if (axiosErr.response) {
-        return {
-          data: null as unknown as T,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      // eslint-disable-next-line no-console
+      console.log(
+        "Request Error",
+        (err as AxiosError<ResponseModel<T>>).response ? JSON.stringify(err.response) : JSON.stringify(err)
+      );
+      const response =
+        (err.response && {
+          data: null,
           meta: {
             error: {
-              code: axiosErr.response.status,
-              message: axiosErr.response.data?.message || axiosErr.response.statusText || "Unknown error"
+              code: err.response.status,
+              message: err.response.statusText
             },
-            status: axiosErr.response.status
+            status: err.response.status
           }
-        };
-      }
+        }) ||
+        ({
+          meta: {
+            status: 400,
+            error: { code: 4000, message: "Unknown Error" }
+          }
+        } as ResponseModel<T>);
 
-      return {
-        data: null as unknown as T,
-        meta: {
-          status: 400,
-          error: { code: 4000, message: "Unknown Error" }
-        }
-      };
+      return response;
     }
+  }
+
+  static useApi<T>(fetcher: () => Promise<ResponseModel<T>>, params?: unknown[]): UseApi<T> {
+    const [data, setData] = useState<T | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setUseApiError] = useState<UseApiError | null>(null);
+    const getData = useCallback(async () => {
+      const rsp = await fetcher();
+      if (!rsp.meta.error) {
+        setData(rsp.data);
+        setLoading(false);
+        if (error) setUseApiError(null);
+      } else {
+        if (data) setData(null);
+        setUseApiError({
+          code: rsp.meta.error.code,
+          message: rsp.meta.error.message
+        });
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [...(params || [])]);
+    const reload = useCallback(() => getData(), [getData]);
+    useEffect(() => {
+      getData();
+    }, [getData]);
+    return {
+      data,
+      loading,
+      success: Boolean(!loading && !error),
+      error,
+      reload
+    };
   }
 
   static error(): Promise<ResponseModel<null>> {
@@ -96,53 +126,6 @@ export default class ApiSlice {
   }
 }
 
-export function useApi<T>(fetcher: () => Promise<ResponseModel<T>>, dependencies: unknown[] = []): UseApi<T> {
-  const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setUseApiError] = useState<UseApiError | null>(null);
-
-  const getData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const rsp = await fetcher();
-      if (!rsp.meta.error) {
-        setData(rsp.data);
-        setUseApiError(null);
-      } else {
-        setData(null);
-        setUseApiError({
-          code: rsp.meta.error.code,
-          message: rsp.meta.error.message
-        });
-      }
-    } catch (err) {
-      setData(null);
-      setUseApiError({
-        code: 500,
-        message: "Network error occurred"
-      });
-    } finally {
-      setLoading(false);
-    }
-  }, [fetcher]);
-
-  const reload = useCallback(() => {
-    void getData();
-  }, [getData]);
-
-  useEffect(() => {
-    void getData();
-  }, [getData, ...dependencies]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  return {
-    data,
-    loading,
-    success: Boolean(!loading && !error && data),
-    error,
-    reload
-  };
-}
-
-export function isFailedResponse<T>(response: ResponseModel<T>): response is FailedResponse {
+export function isFailedResponse(response: ResponseModel): response is FailedResponse {
   return response.meta.error !== null;
 }
