@@ -1,8 +1,7 @@
-
 import { useCallback, useRef } from "react";
 import useGarageStore from "../Store/Usa-garage-store.ts";
 import useWinnerStore from "../Store/Use-winner-store.ts";
-import { EngineStatus } from "../../../../api/slices/engine/types.ts";
+import { EngineStatus } from "../../../../api/Slices/engine/types.ts";
 import { useEngineActions } from "./Use-engine.hook.ts";
 
 export default function useManageRace() {

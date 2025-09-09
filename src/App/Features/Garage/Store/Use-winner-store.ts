@@ -1,4 +1,4 @@
-import { Winner } from "../../../../api/slices/winners/entity";
+import { Winner } from "../../../../api/Slices/winners/entity";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 

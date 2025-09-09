@@ -4,7 +4,7 @@ import CreateCar from "../Garage-actions/Car-actions/Create-car.tsx";
 import useManageRace from "../../Hooks/Use-manage-race.hook.ts";
 import Modal from "../../../../../common/components/Modal/Modal.tsx";
 import { useBoolean } from "../../../../../common/Hooks/Index.hook.ts";
-import Button from "../../../../../common/components/button/button.tsx";
+import Button from "../../../../../common/components/Button/Button.tsx";
 
 function RaceControlPanel() {
   const { canReset, handleAllCarsEngineActions, raceType, resetCars } = useManageRace();

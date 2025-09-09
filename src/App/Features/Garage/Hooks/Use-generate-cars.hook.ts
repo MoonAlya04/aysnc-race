@@ -42,7 +42,7 @@ const getRandomColor = (): string => {
 const generateRandomCars = () => {
   const cars = [];
 
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= 100; i++) {
     const car = {
       name: getRandomCarName(),
       color: getRandomColor()

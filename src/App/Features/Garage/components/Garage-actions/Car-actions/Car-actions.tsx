@@ -2,9 +2,9 @@ import React, { useCallback, useMemo, useState } from "react";
 import UpdateCar from "./Update-car.tsx";
 import RemoveCar from "./Remove-car.tsx";
 import useGarageStore from "../../../Store/Usa-garage-store.ts";
-import IconButton from "../../../../../../common/components/button/Icon-Button.tsx";
+import IconButton from "../../../../../../common/components/Button/Icon-Button.tsx";
 import Modal from "../../../../../../common/components/Modal/Modal.tsx";
-import { EngineStatus } from "../../../../../../api/slices/engine/types.ts";
+import { EngineStatus } from "../../../../../../api/Slices/engine/types.ts";
 
 type Modal = "update" | "delete";
 

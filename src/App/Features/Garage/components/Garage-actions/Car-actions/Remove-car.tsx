@@ -1,4 +1,4 @@
-import Button from "../../../../../../common/components/button/button.tsx";
+import Button from "../../../../../../common/components/Button/Button.tsx";
 import React, { useCallback } from "react";
 import useGarageStore from "../../../Store/Usa-garage-store.ts";
 import useManageGarageActions from "../../../Hooks/Use-manage-garage-actions.hook.ts";

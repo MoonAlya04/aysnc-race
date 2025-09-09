@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Button from "../button/button.tsx";
+import Button from "../Button/Button.tsx";
+
 
 function Header() {
     const navigate = useNavigate();

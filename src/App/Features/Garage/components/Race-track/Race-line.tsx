@@ -1,4 +1,4 @@
-import { CarCondition } from "../../../../../api/slices/garage/types";
+import { CarCondition } from "../../../../../api/Slices/garage/types";
 import React, { PropsWithChildren } from "react";
 
 interface Props {
@@ -25,4 +25,3 @@ const RaceLine = ({ condition, name, children }: PropsWithChildren<Props>) => {
 };
 
 export default RaceLine;
-

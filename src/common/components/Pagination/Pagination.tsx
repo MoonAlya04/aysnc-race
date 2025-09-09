@@ -1,5 +1,5 @@
 import React from "react";
-import IconButton from "../button/Icon-Button.tsx";
+import IconButton from "../Button/Icon-Button.tsx";
 
 interface Props {
   onPageChange: (page: number) => void;

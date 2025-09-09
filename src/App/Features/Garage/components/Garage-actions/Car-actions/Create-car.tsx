@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import useManageGarageActions from "../../../Hooks/Use-manage-garage-actions.hook.ts";
 import ActionsForm from "./Actions-form.tsx";
-import Button from "../../../../../../common/components/button/button.tsx";
+import Button from "../../../../../../common/components/Button/Button.tsx";
 interface Props {
   onClose: () => void;
 }

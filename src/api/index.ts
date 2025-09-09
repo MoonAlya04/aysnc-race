@@ -1,9 +1,7 @@
-
 import ApiSlice from "./slice.ts";
-import EngineSlice from "./slices/engine/index.ts";
-import GarageSlice from "./slices/garage/index.ts";
-import WinnersSlice from "./slices/winners/index.ts";
-
+import EngineSlice from "./Slices/engine/index.ts";
+import GarageSlice from "./Slices/garage/index.ts";
+import WinnersSlice from "./Slices/winners/index.ts";
 
 class Api extends ApiSlice {
   static garage = GarageSlice;
