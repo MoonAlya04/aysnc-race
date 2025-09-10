@@ -1,10 +1,10 @@
-import { CarCondition } from "../../../../../api/Slices/garage/types.ts";
-import { RaceType } from "../../Store/Use-winner-store.ts";
-import useCarAnimation from "../../Hooks/Use-car-animation.ts";
-import { Car as CarEntity } from "../../../../../api/Slices/garage/entity.ts";
-import { useManageCar } from "../../Hooks/Use-manage-car.hook.ts";
-import { EngineStatus } from "../../../../../api/Slices/engine/types.ts";
-import CarWithWindows from "./Car-icon.tsx";
+import { CarCondition } from "../../../../../api/Slices/garage/types";
+import { RaceType } from "../../Store/Use-winner-store";
+import useCarAnimation from "../../Hooks/Use-car-animation";
+import { Car as CarEntity } from "../../../../../api/Slices/garage/entity";
+import { useManageCar } from "../../Hooks/Use-manage-car.hook";
+import { EngineStatus } from "../../../../../api/Slices/engine/types";
+import CarWithWindows from "./Car-icon";
 
 interface Props {
   car: CarEntity;

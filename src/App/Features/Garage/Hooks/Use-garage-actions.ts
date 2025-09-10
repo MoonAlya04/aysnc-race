@@ -1,4 +1,4 @@
-import Api from "../../../../api/index.ts";
+import Api from "../../../../api/index";
 import { Callbacks } from "../../../../common/types";
 import { useCallback } from "react";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { headValues } from "../../../../../common/lib/constants.ts";
+import { headValues } from "../../../../../common/lib/constants";
 
 const TableHead = () => {
   return (

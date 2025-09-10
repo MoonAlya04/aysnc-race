@@ -1,13 +1,13 @@
 import { useMemo } from "react";
-import useCars from "../../Hooks/Use-cars-hook.ts";
-import Car from "../Car/Car.tsx";
-import GarageActions from "../Garage-actions/Garage-actions.tsx";
-import RaceLine from "./Race-line.tsx";
-import WinnerModal from "../../../Winner/components/Modal/Winner-modal.tsx";
-import Modal from "../../../../../common/components/Modal/Modal.tsx";
-import Pagination from "../../../../../common/components/Pagination/Pagination.tsx";
-import useAnnounceWinner from "../../Hooks/Use-announce-winner.hook.ts";
-import Loading from "../../../../../common/components/Loading-indicator/Loading.tsx";
+import useCars from "../../Hooks/Use-cars-hook";
+import Car from "../Car/Car";
+import GarageActions from "../Garage-actions/Garage-actions";
+import RaceLine from "./Race-line";
+import WinnerModal from "../../../Winner/components/Modal/Winner-modal";
+import Modal from "../../../../../common/components/Modal/Modal";
+import Pagination from "../../../../../common/components/Pagination/Pagination";
+import useAnnounceWinner from "../../Hooks/Use-announce-winner.hook";
+import Loading from "../../../../../common/components/Loading-indicator/Loading";
 
 const RaceTrack = () => {
   const { cars, loading, setActivePage, activePage, carsCount, pagesLength } = useCars();

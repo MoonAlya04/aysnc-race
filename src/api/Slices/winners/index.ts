@@ -1,5 +1,5 @@
-import ApiSlice from "../../slice.ts";
-import { GetWinnersResponse, Winner } from "./entity.ts";
+import ApiSlice from "../../slice";
+import { GetWinnersResponse, Winner } from "./entity";
 import type { GetWinnersParams } from "./types.ts";
 import type { FailedResponse, SuccessResponse } from "../../types";
 

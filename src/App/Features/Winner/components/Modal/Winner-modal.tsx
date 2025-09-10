@@ -1,4 +1,4 @@
-import Button from "../../../../../common/components/Button/Button.tsx";
+import Button from "../../../../../common/components/Button/Button";
 
 interface Props {
   time: string;

@@ -1,7 +1,7 @@
 
 import React, { PropsWithChildren } from "react";
 import { IconName } from "../Icon/Icon-data";
-import Icon from "../Icon/Icon.tsx";
+import Icon from "../Icon/Icon";
 
 interface Props {
   onClick?: () => void;

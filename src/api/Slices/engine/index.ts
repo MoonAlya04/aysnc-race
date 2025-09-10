@@ -1,6 +1,6 @@
-import ApiSlice from "../../slice.ts";
+import ApiSlice from "../../slice";
 import { FailedResponse, SuccessResponse } from "../../types";
-import { EngineResponse } from "./entity.ts";
+import { EngineResponse } from "./entity";
 import { EngineStatus } from "./types";
 
 export default class EngineSlice extends ApiSlice {

@@ -1,7 +1,7 @@
-import ApiSlice from "../../slice.ts";
+import ApiSlice from "../../slice";
 import { FailedResponse, SuccessResponse } from "../../types";
 
-import { Car, GetCarsResponse } from "./entity.ts";
+import { Car, GetCarsResponse } from "./entity";
 
 export default class GarageSlice extends ApiSlice {
   static baseURL = ApiSlice.baseURL + "/garage";

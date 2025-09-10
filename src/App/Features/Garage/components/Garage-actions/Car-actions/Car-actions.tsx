@@ -1,10 +1,10 @@
 import React, { useCallback, useMemo, useState } from "react";
-import UpdateCar from "./Update-car.tsx";
-import RemoveCar from "./Remove-car.tsx";
-import useGarageStore from "../../../Store/Usa-garage-store.ts";
-import IconButton from "../../../../../../common/components/Button/Icon-Button.tsx";
-import Modal from "../../../../../../common/components/Modal/Modal.tsx";
-import { EngineStatus } from "../../../../../../api/Slices/engine/types.ts";
+import UpdateCar from "./Update-car";
+import RemoveCar from "./Remove-car";
+import useGarageStore from "../../../Store/Usa-garage-store";
+import IconButton from "../../../../../../common/components/Button/Icon-Button";
+import Modal from "../../../../../../common/components/Modal/Modal";
+import { EngineStatus } from "../../../../../../api/Slices/engine/types";
 
 type Modal = "update" | "delete";
 

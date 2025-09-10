@@ -1,9 +1,8 @@
-
 import React from "react";
-import TableHead from "./Table-head.tsx";
-import { WinnerWithName } from "./Winner-table.tsx";
-import TableRow from "./Table-row.tsx";
-import Pagination from "../../../../../common/components/Pagination/Pagination.tsx";
+import TableHead from "./Table-head";
+import { WinnerWithName } from "./Winner-table";
+import TableRow from "./Table-row";
+import Pagination from "../../../../../common/components/Pagination/Pagination";
 
 interface Props {
   winnersWithCarName: WinnerWithName[];

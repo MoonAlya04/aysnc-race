@@ -1,8 +1,8 @@
-import { EngineStatus } from "../../../../../../api/Slices/engine/types.ts";
-import IconButton from "../../../../../../common/components/Button/Icon-Button.tsx";
-import { useEngineActions } from "../../../Hooks/Use-engine.hook.ts";
-import useGarageStore from "../../../Store/Usa-garage-store.ts";
-import useWinnerStore, { RaceType } from "../../../Store/Use-winner-store.ts";
+import { EngineStatus } from "../../../../../../api/Slices/engine/types";
+import IconButton from "../../../../../../common/components/Button/Icon-Button";
+import { useEngineActions } from "../../../Hooks/Use-engine.hook";
+import useGarageStore from "../../../Store/Usa-garage-store";
+import useWinnerStore, { RaceType } from "../../../Store/Use-winner-store";
 import { useCallback } from "react";
 
 interface Props {

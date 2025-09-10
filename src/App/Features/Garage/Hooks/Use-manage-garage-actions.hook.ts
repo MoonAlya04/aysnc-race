@@ -1,8 +1,7 @@
-
 import { useState } from "react";
-import useCars from "./Use-cars-hook.ts";
-import useGarageStore from "../Store/Usa-garage-store.ts";
-import useGarageActions from "./Use-garage-actions.ts";
+import useCars from "./Use-cars-hook";
+import useGarageStore from "../Store/Usa-garage-store";
+import useGarageActions from "./Use-garage-actions";
 
 export default function useManageGarageActions() {
   const { removeCar, updateCar } = useGarageStore(state => ({

@@ -1,9 +1,9 @@
-import { CarCondition } from "../../../../api/Slices/garage/types.ts";
+import { CarCondition } from "../../../../api/Slices/garage/types";
 import { useCallback } from "react";
-import useGarageStore from "../Store/Usa-garage-store.ts";
-import { EngineStatus } from "../../../../api/Slices/engine/types.ts";
-import { RaceType } from "../Store/Use-winner-store.ts";
-import useWinnerAction from "../../Winner/Hooks/use-winner-action.ts";
+import useGarageStore from "../Store/Usa-garage-store";
+import { EngineStatus } from "../../../../api/Slices/engine/types";
+import { RaceType } from "../Store/Use-winner-store";
+import useWinnerAction from "../../Winner/Hooks/use-winner-action";
 
 interface Props {
   id: number;

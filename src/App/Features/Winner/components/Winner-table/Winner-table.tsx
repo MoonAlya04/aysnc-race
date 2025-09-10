@@ -1,11 +1,10 @@
-import Loading from "../../../../../common/components/Loading-indicator/Loading.tsx";
-import useCars from "../../../../../App/Features/Garage/Hooks/Use-cars-hook.ts";
-import { WinnerWithCarId } from "../../../../../App/Features/Garage/Store/Use-winner-store.ts";
+import Loading from "../../../../../common/components/Loading-indicator/Loading";
+import useCars from "../../../../../App/Features/Garage/Hooks/Use-cars-hook";
+import { WinnerWithCarId } from "../../../../../App/Features/Garage/Store/Use-winner-store";
 import { useCallback } from "react";
-import useWinnersTable from "../../Hooks/Use-winners-table.hook.ts";
-import Table from "./Table.tsx";
-import { mergeAndSumWins } from "../../../../../common/lib/index.ts";
-
+import useWinnersTable from "../../Hooks/Use-winners-table.hook";
+import Table from "./Table";
+import { mergeAndSumWins } from "../../../../../common/lib/index";
 
 export interface WinnerWithName extends WinnerWithCarId {
   carName: string;

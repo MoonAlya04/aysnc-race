@@ -1,7 +1,6 @@
-
 import { useCallback, useState } from "react";
-import useWinners from "./Use-winners.ts";
-import useWinnerStore from "../../Garage/Store/Use-winner-store.ts";
+import useWinners from "./Use-winners";
+import useWinnerStore from "../../Garage/Store/Use-winner-store";
 
 export default function useWinnerAction() {
   const { createWinner, updateWinner } = useWinners();

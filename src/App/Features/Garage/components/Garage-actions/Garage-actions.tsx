@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
-import CarActions from "./Car-actions/Car-actions.tsx";
-import RaceActions from "./Race-actions/Race-actions.tsx";
+import CarActions from "./Car-actions/Car-actions";
+import RaceActions from "./Race-actions/Race-actions";
 
 interface Props {
   id: number;

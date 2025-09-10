@@ -1,4 +1,4 @@
-import { EngineStatus } from "./types.ts";
+import { EngineStatus } from "./types";
 
 const DEFAULT_VELOCITY = 0;
 const DEFAULT_DISTANCE = 0;

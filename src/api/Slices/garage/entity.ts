@@ -1,5 +1,5 @@
-import { EngineResponse } from "../engine/entity.ts";
-import { CarCondition } from "./types.ts";
+import { EngineResponse } from "../engine/entity";
+import { CarCondition } from "./types";
 
 const WITHOUT_ID = -1;
 const DEFAULT_POSITION = 0;

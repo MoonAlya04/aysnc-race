@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import useWinnerStore from "../Store/Use-winner-store.ts";
+import useWinnerStore from "../Store/Use-winner-store";
 
 export default function useAnnounceWinner() {
   const [showWinner, setShowWinner] = useState(false);

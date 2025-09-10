@@ -1,5 +1,5 @@
-import { EngineStatus } from "../../../../api/Slices/engine/types.ts";
-import { CarCondition } from "../../../../api/Slices/garage/types.ts";
+import { EngineStatus } from "../../../../api/Slices/engine/types";
+import { CarCondition } from "../../../../api/Slices/garage/types";
 import { useCallback, useEffect, useRef } from "react";
 
 const increaseSpeed = 2;

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { useCarsResponse } from "./Use-cars-response.hook.ts";
-import useGarageStore from "../Store/Usa-garage-store.ts";
+import { useCarsResponse } from "./Use-cars-response.hook";
+import useGarageStore from "../Store/Usa-garage-store";
 
 const limit = 9;
 

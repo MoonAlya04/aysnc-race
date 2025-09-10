@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
-import useGarageStore from "../../../Store/Usa-garage-store.ts";
-import Button from "../../../../../../common/components/Button/Button.tsx";
-import useManageGarageActions from "../../../Hooks/Use-manage-garage-actions.hook.ts";
-import ActionsForm from "./Actions-form.tsx";
+import useGarageStore from "../../../Store/Usa-garage-store";
+import Button from "../../../../../../common/components/Button/Button";
+import useManageGarageActions from "../../../Hooks/Use-manage-garage-actions.hook";
+import ActionsForm from "./Actions-form";
 
 interface Props {
   id: number;
