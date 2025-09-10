@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import useGarageStore from "../../../Store/Usa-garage-store";
-import Button from "../../../../../../common/components/Button/Button";
+import Button from "../../../../../../common/components/Button/Buttons";
 import useManageGarageActions from "../../../Hooks/Use-manage-garage-actions.hook";
 import ActionsForm from "./Actions-form";
 

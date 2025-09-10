@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import useWinnerStore from "../../Garage/Store/Use-winner-store";
-import useWinners from "./Use-winners.js";
+import useWinners from "./Use-winners";
 
 export default function useWinnersTable() {
   const { getWinners } = useWinners();

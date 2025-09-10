@@ -1,4 +1,4 @@
-import Button from "../../../../../../common/components/Button/Button";
+import Button from "../../../../../../common/components/Button/Buttons";
 import React, { useCallback } from "react";
 import useGarageStore from "../../../Store/Usa-garage-store";
 import useManageGarageActions from "../../../Hooks/Use-manage-garage-actions.hook";

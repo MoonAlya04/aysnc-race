@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Outlet } from "react-router-dom";
-import Header from "./common/components/Header/Header.jsx";
+import Header from "./common/components/Header/Header";
 export const metadata = {
   title: "ASYNC RACE",
   description: "Async Race Task"
