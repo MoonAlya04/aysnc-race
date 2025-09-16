@@ -11,7 +11,7 @@ interface Props {
   winnersCount: number;
 }
 
-const Table = ({ page, setPage, winnersCount, winnersWithCarName }: Props) => {
+const Table = ({ winnersCount, winnersWithCarName }: Props) => {
   const pagesLength = Math.ceil(winnersCount / 7);
 
   return (
@@ -24,8 +24,6 @@ const Table = ({ page, setPage, winnersCount, winnersWithCarName }: Props) => {
           ))}
         </tbody>
       </table>
-
-      {pagesLength > 1 && <Pagination onPageChange={setPage} carsCount={winnersCount} page={page} pagesLength={pagesLength} />}
     </div>
   );
 };

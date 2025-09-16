@@ -29,7 +29,6 @@ export function useManageCar({ id, winnerId, announceWinner, raceType }: Props) 
     updateCarPosition({ id, car: { position } });
     updateCarStatus({ id, status: EngineStatus.stopped });
 
-    // Only first car can become winner
     if (!winnerId) {
       await handleWinnerAction({ id, time });
 

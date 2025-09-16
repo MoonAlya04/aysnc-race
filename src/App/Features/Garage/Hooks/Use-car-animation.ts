@@ -3,7 +3,7 @@ import { EngineStatus } from "../../../../api/Slices/engine/types";
 import { CarCondition } from "../../../../api/Slices/garage/types";
 import useWinnerStore from "../Store/Use-winner-store";
 
-const INCREASE_SPEED = 2;
+const INCREASE_SPEED = 1;
 const DIVIDER = 1000;
 const ZERO = 0;
 
