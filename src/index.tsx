@@ -10,8 +10,7 @@ import Garage from "./App/Garage/Page";
 
 const container = document.getElementById("root");
 if (container) {
-  const root = createRoot(container);
-  root.render(
+  createRoot(container).render(
     <React.StrictMode>
       <BrowserRouter>
         <Routes>

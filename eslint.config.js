@@ -21,10 +21,16 @@ export default defineConfig([
       pluginReact.configs.flat.recommended,
     ],
     rules: {
+      "react/react-in-jsx-scope": "off",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/no-explicit-any": "warn",
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
     },
   },
 ]);

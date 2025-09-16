@@ -17,7 +17,13 @@ const RaceLine = ({ condition, name, children }: PropsWithChildren<Props>) => {
         {condition}
       </div>
       <div className="absolute top-0 left-0 w-full h-full flex flex-row items-center justify-center">
-        <h1 className="text-white font-bold text-6xl opacity-30 text-shadow-custom">{name}</h1>
+        <h1
+          className="text-white font-bold text-6xl opacity-30 text-shadow-custom max-w-[400px] truncate"
+          title={name}
+          style={{ wordBreak: "break-all" }}
+        >
+          {name}
+        </h1>
       </div>
       <div className="w-full">{children}</div>
     </div>

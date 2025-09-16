@@ -6,6 +6,7 @@ export default function useWinnerAction() {
   const { createWinner, updateWinner } = useWinners();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
   const { getWinner, updateWinnerInStore, createWinnerInStore } = useWinnerStore(state => ({
     getWinner: state.getWinner,
     updateWinnerInStore: state.updateWinner,
@@ -15,16 +16,20 @@ export default function useWinnerAction() {
   const handleWinnerAction = useCallback(
     async ({ id, time }: { id: number; time: number }) => {
       const winner = getWinner(id);
+
       if (winner) {
+        const bestTime = Math.min(winner.time, time);
+
         const rsp = await updateWinner({
           id: winner.id,
           wins: winner.wins + 1,
-          time,
+          time: bestTime,
           callbacks: {
             beforeAPICall: () => setLoading(true),
             afterAPICall: () => setLoading(false)
           }
         });
+
         if (rsp.error) {
           setError(rsp.error.message);
         } else {
@@ -38,6 +43,7 @@ export default function useWinnerAction() {
             afterAPICall: () => setLoading(false)
           }
         });
+
         if (rsp.error) {
           setError(rsp.error.message);
         } else {
@@ -45,7 +51,7 @@ export default function useWinnerAction() {
         }
       }
     },
-    [getWinner, updateWinner, setLoading, setError, updateWinnerInStore, createWinnerInStore, createWinner]
+    [getWinner, updateWinner, createWinner, updateWinnerInStore, createWinnerInStore]
   );
 
   return { handleWinnerAction, loading, error };

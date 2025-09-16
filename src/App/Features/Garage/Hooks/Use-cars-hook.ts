@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useCarsResponse } from "./Use-cars-response.hook";
 import useGarageStore from "../Store/Usa-garage-store";
 
-const limit = 9;
+const limit = 7;
 
 export default function useCars() {
   const { cars, setCars, setCarsCount, carsCount, setActivePage, activePage } = useGarageStore(state => ({
@@ -59,12 +59,11 @@ export default function useCars() {
       setHasInitializedStore(true);
     }
     if (hasInitializedStore && !cars[activePage]?.length) {
-      // request made
       getCars(activePage);
     }
   }, [getCars, cars, hasInitializedStore, activePage]);
 
-  const pagesLength = Math.floor(carsCount / 9) + 1;
+  const pagesLength = Math.ceil(carsCount / 7);
 
   return {
     cars: cars[activePage] || [],

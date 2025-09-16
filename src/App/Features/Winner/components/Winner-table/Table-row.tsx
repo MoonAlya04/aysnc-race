@@ -10,7 +10,9 @@ const TableRow = ({ winner, carName }: Props) => {
   return (
     <tr className="text-center">
       <td className="border border-solid border-[#ccc]">{winner.id}</td>
-      <td className="border border-solid border-[#ccc]">{carName}</td>
+      <td className="border border-solid border-[#ccc] max-w-[180px] truncate" title={carName}>
+        {carName}
+      </td>
       <td className="border border-solid border-[#ccc]">{winner.wins}</td>
       <td className="border border-solid border-[#ccc]">{winner.time}</td>
     </tr>

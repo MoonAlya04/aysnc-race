@@ -10,33 +10,49 @@ export default function useManageRace() {
     resetCarsInStore: state.resetCars
   }));
 
-  const onGoingRace = useRef(true);
-  const canReset = cars?.some(car => car.position > 0) && onGoingRace.current;
-  const { raceWinnerId, setRaceWinnerId, setRaceType, raceType } = useWinnerStore(state => ({
+  const onGoingRace = useRef<boolean>(false);
+
+  const { raceWinnerId, setRaceWinnerId, setRaceType, raceType, setRaceInProgress } = useWinnerStore(state => ({
     raceWinnerId: state.raceWinnerId,
     setRaceWinnerId: state.setRaceWinnerId,
     setRaceType: state.setRaceType,
-    raceType: state.raceType
+    raceType: state.raceType,
+    setRaceInProgress: state.setRaceInProgress
   }));
+
   const { updateCarEngine } = useEngineActions();
 
   const handleAllCarsEngineActions = useCallback(async () => {
+    if (!cars || cars.length === 0) return;
+
     setRaceType("multi");
+    setRaceInProgress(true);
+
     const actions = cars.map(car => updateCarEngine({ id: car.id, status: EngineStatus.started }));
+
     await Promise.all(actions);
     onGoingRace.current = true;
-  }, [cars, updateCarEngine, setRaceType]);
+  }, [cars, updateCarEngine, setRaceType, setRaceInProgress]);
 
   const resetCars = useCallback(async () => {
+    if (!cars || cars.length === 0) return;
+
     setRaceType(null);
+    setRaceInProgress(false);
+
     const actions = cars.map(car => updateCarEngine({ id: car.id, status: EngineStatus.stopped }));
+
     resetCarsInStore();
     await Promise.all(actions);
+
     onGoingRace.current = false;
+
     if (raceWinnerId) {
       setRaceWinnerId(null);
     }
-  }, [cars, updateCarEngine, resetCarsInStore, raceWinnerId, setRaceWinnerId, setRaceType]);
+  }, [cars, updateCarEngine, resetCarsInStore, raceWinnerId, setRaceWinnerId, setRaceType, setRaceInProgress]);
+
+  const canReset = !!cars?.some(car => car.position > 0) && onGoingRace.current;
 
   return { handleAllCarsEngineActions, resetCars, canReset, raceType };
 }

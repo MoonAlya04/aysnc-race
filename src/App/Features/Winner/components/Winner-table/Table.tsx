@@ -10,19 +10,21 @@ interface Props {
   setPage: (page: number) => void;
   winnersCount: number;
 }
+
 const Table = ({ page, setPage, winnersCount, winnersWithCarName }: Props) => {
-  const pagesLength = Math.floor(winnersWithCarName.length / 10) + 1;
+  const pagesLength = Math.ceil(winnersCount / 7);
 
   return (
     <div>
       <table className="w-[600px] bg-white neon-border shadow-md rounded-lg overflow-hidden">
         <TableHead />
         <tbody>
-          {winnersWithCarName.map(winner => (
-            <TableRow key={`winner-${winner.id}`} winner={winner} carName={winner.carName} />
+          {winnersWithCarName.map((winner, index) => (
+            <TableRow key={`winner-${winner.id}-${index}`} winner={winner} carName={winner.carName} />
           ))}
         </tbody>
       </table>
+
       {pagesLength > 1 && <Pagination onPageChange={setPage} carsCount={winnersCount} page={page} pagesLength={pagesLength} />}
     </div>
   );

@@ -16,13 +16,27 @@ const RaceTrack = () => {
   const showPagination = pagesLength > 1;
 
   const winnerCarName = cars?.find(car => car.id === raceWinnerId)?.name ?? "";
+
+  const winner = raceWinnerId ? getWinner(raceWinnerId) : null;
+
   const winnerCarTime = useMemo(() => {
     if (!raceWinnerId) return "";
     const winner = getWinner(raceWinnerId);
-    return winner?.time?.toString() ?? "";
-  }, [getWinner, raceWinnerId]);
+    if (!winner?.time) return "";
+    return winner.time.toFixed(2);
+  }, [raceWinnerId, getWinner]);
+
+  console.log("winner from RaceTrack:", winner);
 
   const openWinnerModal = showWinner && !!raceWinnerId;
+
+  if (!loading && (!cars || cars.length === 0)) {
+    return (
+      <div className="px-10 bg-green-300 min-h-[400px] flex flex-col items-center justify-center w-full">
+        <h2 className="text-2xl text-gray-700 font-bold">No cars on this page.</h2>
+      </div>
+    );
+  }
 
   return (
     <div className="px-10 bg-green-300">

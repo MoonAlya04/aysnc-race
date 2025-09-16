@@ -18,6 +18,7 @@ function ActionsForm({ values, setValues }: Props) {
           placeholder="Car Name"
           name="name"
           value={values.name}
+          maxLength={30}
           onChange={e => setValues({ ...values, name: e.target.value })}
         />
       </div>

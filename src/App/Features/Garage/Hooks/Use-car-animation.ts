@@ -1,10 +1,24 @@
+import { useCallback, useEffect, useRef } from "react";
 import { EngineStatus } from "../../../../api/Slices/engine/types";
 import { CarCondition } from "../../../../api/Slices/garage/types";
-import { useCallback, useEffect, useRef } from "react";
+import useWinnerStore from "../Store/Use-winner-store";
 
-const increaseSpeed = 2;
-const divider = 1000;
-const nonEmptyInteger = 0;
+const INCREASE_SPEED = 2;
+const DIVIDER = 1000;
+const ZERO = 0;
+
+interface UseCarAnimationProps {
+  status: EngineStatus;
+  speed: number;
+  condition: CarCondition;
+  initialPosition: number;
+  onReachTheEnd: (position: number, time: number) => void;
+  handlePosition: (position: number) => void;
+}
+
+interface UseCarAnimationResult {
+  carRef: React.RefObject<HTMLDivElement | null>;
+}
 
 export default function useCarAnimation({
   status,
@@ -13,36 +27,34 @@ export default function useCarAnimation({
   initialPosition,
   onReachTheEnd,
   handlePosition
-}: {
-  status: EngineStatus;
-  speed: number;
-  condition: CarCondition;
-  initialPosition: number;
-  onReachTheEnd: (position: number, time: number) => void;
-  handlePosition: (position: number) => void;
-}) {
+}: UseCarAnimationProps): UseCarAnimationResult {
   const positionRef = useRef<number>(initialPosition);
   const animationId = useRef<number | null>(null);
   const previousTimeRef = useRef<number | null>(null);
   const carRef = useRef<HTMLDivElement>(null);
-  const roadLength = useRef<number>(nonEmptyInteger);
-  const isCarStarted = useRef(false);
+  const roadLength = useRef<number>(ZERO);
+  const isCarStarted = useRef<boolean>(false);
+  const startTimeRef = useRef<number | null>(null);
+  const { raceInProgress } = useWinnerStore(state => ({
+    raceInProgress: state.raceInProgress
+  }));
   const animate = useCallback(
-    (time: number) => {
+    (time: number): void => {
       if (previousTimeRef.current !== null && condition === CarCondition.running) {
         const deltaTime = time - previousTimeRef.current;
 
-        const adjustedSpeed = status === EngineStatus.drive ? speed * increaseSpeed : speed;
+        const adjustedSpeed = status === EngineStatus.drive ? speed * INCREASE_SPEED : speed;
+        const newPosition = positionRef.current + (adjustedSpeed * deltaTime) / DIVIDER;
 
-        const newPosition = positionRef.current + (adjustedSpeed * deltaTime) / divider;
-
-        positionRef.current = newPosition >= roadLength.current ? roadLength.current : newPosition;
+        positionRef.current = Math.min(newPosition, roadLength.current);
 
         if (positionRef.current >= roadLength.current) {
-          const timeInSec = time / divider;
-          onReachTheEnd(positionRef.current, +timeInSec.toFixed(1));
+          // elapsed in seconds
+          const elapsed = startTimeRef.current !== null ? (time - startTimeRef.current) / DIVIDER : ZERO;
+          onReachTheEnd(positionRef.current, +elapsed.toFixed(1));
           return;
         }
+
         if (carRef.current) {
           carRef.current.style.transform = `translateX(${positionRef.current}px)`;
         }
@@ -56,56 +68,72 @@ export default function useCarAnimation({
     [speed, status, onReachTheEnd, condition]
   );
 
-  const handleResize = useCallback(() => {
-    if (carRef.current && carRef.current.parentElement) {
-      roadLength.current = carRef.current.parentElement.scrollWidth - carRef.current.scrollWidth || nonEmptyInteger;
+  const handleResize = useCallback((): void => {
+    if (carRef.current?.parentElement) {
+      roadLength.current = carRef.current.parentElement.scrollWidth - carRef.current.scrollWidth || ZERO;
     }
   }, []);
 
   useEffect(() => {
-    if (carRef.current && carRef.current.parentElement) {
+    if (carRef.current?.parentElement) {
       positionRef.current = initialPosition;
       carRef.current.style.transform = `translateX(${positionRef.current}px)`;
     }
   }, [initialPosition]);
 
   useEffect(() => {
-    if (carRef.current && carRef.current.parentElement) {
-      roadLength.current = carRef.current.parentElement.scrollWidth - carRef.current.scrollWidth || nonEmptyInteger;
+    if (!raceInProgress) {
+      if (animationId.current) {
+        cancelAnimationFrame(animationId.current);
+        animationId.current = null;
+      }
+      return;
+    }
+
+    if (carRef.current?.parentElement) {
+      roadLength.current = carRef.current.parentElement.scrollWidth - carRef.current.scrollWidth || ZERO;
     }
 
     window.addEventListener("resize", handleResize);
 
-    // Start or stop the animation based on the status
     if (status !== EngineStatus.stopped) {
-      previousTimeRef.current = performance.now();
-      animationId.current = requestAnimationFrame(animate);
-      if (!isCarStarted.current) {
-        handlePosition(1);
-        isCarStarted.current = true;
+      // Only set these once, when animation starts
+      if (animationId.current === null) {
+        previousTimeRef.current = performance.now();
+        if (positionRef.current === initialPosition) {
+          startTimeRef.current = previousTimeRef.current;
+        }
+        animationId.current = requestAnimationFrame(animate);
+
+        if (!isCarStarted.current) {
+          handlePosition(1);
+          isCarStarted.current = true;
+        }
       }
-      // just for knowing the car is started
     } else if (animationId.current) {
       if (condition === CarCondition.broken) {
         handlePosition(positionRef.current);
       } else if (positionRef.current < roadLength.current) {
         if (carRef.current) {
-          positionRef.current = nonEmptyInteger;
-          carRef.current.style.transform = `translateX(0px)`;
+          positionRef.current = ZERO;
+          carRef.current.style.transform = "translateX(0px)";
         }
       }
 
       cancelAnimationFrame(animationId.current);
       animationId.current = null;
+      previousTimeRef.current = null;
+      startTimeRef.current = null;
+      isCarStarted.current = false;
     }
 
     return () => {
       window.removeEventListener("resize", handleResize);
       if (animationId.current) {
         cancelAnimationFrame(animationId.current);
+        animationId.current = null;
       }
     };
-  }, [condition, speed, animate, handleResize, status, handlePosition]);
-
+  }, [condition, speed, animate, handleResize, status, handlePosition, initialPosition, raceInProgress]);
   return { carRef };
 }

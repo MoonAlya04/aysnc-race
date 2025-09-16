@@ -54,15 +54,34 @@ npm start
 
 The backend will run on [http://localhost:3000](http://localhost:3000).
 
+## 🏆 Evaluation Checklist
 
-## 🏆 Score
+### Minimum scope
 
-- Garage page (CRUD operations, pagination, responsive) – **110 / 120**
-- Race animation (engine start/stop, race between cars) – **60 / 80**
-- Winners page (results, basic stats, no advanced sorting yet) – **60 / 90**
-- State management with Zustand + Axios integration – **35 / 40**
-- UI/UX (Tailwind styling, modals, responsive design) – **40 / 50**
-- Code quality (TypeScript, project structure, clean components) – **30 / 50**
-- Extra features (future improvements, customization potential) – **0 / 30**
+- [ ] A user can create, update, delete a car (CRUD operations in the garage).
+- [ ] Pagination is implemented for the garage (7 cars per page).
+- [ ] A user can start a race for all cars on the page.
+- [ ] Animation works correctly and corresponds to the real car speed.
+- [ ] The race result is recorded and displayed in the winners table.
 
-\*\*Total Score: 335 /
+### Extra scope
+
+- [ ] Car engine start/stop is implemented.
+- [ ] Reset race button stops all cars.
+- [ ] Winner’s time is recorded and displayed.
+- [ ] Winners page with pagination is implemented.
+- [ ] Sorting of winners by wins and best time is implemented.
+
+### Technical requirements
+
+- [ ] Application is written in **React** + **TypeScript**.
+- [ ] State management is handled by **Zustand**.
+- [ ] Backend requests are made via **Axios**.
+- [ ] Code follows project structure and is well-typed.
+- [ ] Application is deployed and accessible online.
+
+### Extra features (optional)
+
+- [ ] Modal dialogs for creating/updating cars.
+- [ ] Responsive design for mobile and desktop.
+- [ ] Additional UI/UX improvements.

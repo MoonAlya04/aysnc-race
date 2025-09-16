@@ -1,9 +1,9 @@
-import { CarCondition } from "../../../../api/Slices/garage/types";
 import { useCallback } from "react";
 import useGarageStore from "../Store/Usa-garage-store";
 import { EngineStatus } from "../../../../api/Slices/engine/types";
 import { RaceType } from "../Store/Use-winner-store";
 import useWinnerAction from "../../Winner/Hooks/use-winner-action";
+import useWinnerStore from "../Store/Use-winner-store";
 
 interface Props {
   id: number;
@@ -11,39 +11,39 @@ interface Props {
   winnerId: number | null;
   announceWinner: (id: number) => void;
 }
+
 export function useManageCar({ id, winnerId, announceWinner, raceType }: Props) {
   const { updateCarPosition, updateCarStatus, carCondition } = useGarageStore(store => ({
     updateCarPosition: store.updateCar,
     updateCarStatus: store.updateCarStatus,
-    carCondition: store.getCar(id)?.condition,
-    updateCarCondition: (condition: CarCondition) => store.updateCar({ id, car: { condition } })
+    carCondition: store.getCar(id)?.condition
   }));
 
   const { handleWinnerAction } = useWinnerAction();
+  const { setRaceInProgress } = useWinnerStore(state => ({
+    setRaceInProgress: state.setRaceInProgress
+  }));
 
   const carReachTheEnd = async (position: number, time: number) => {
-    updateCarPosition({
-      id,
-      car: { position }
-    });
-    updateCarStatus({
-      id,
-      status: EngineStatus.stopped
-    });
+    // Stop car visually
+    updateCarPosition({ id, car: { position } });
+    updateCarStatus({ id, status: EngineStatus.stopped });
+
+    // Only first car can become winner
     if (!winnerId) {
       await handleWinnerAction({ id, time });
+
       if (raceType === "multi") {
         announceWinner(id);
+      } else {
+        setRaceInProgress(false);
       }
     }
   };
 
   const handlePosition = useCallback(
     (position: number) => {
-      updateCarPosition({
-        id,
-        car: { position }
-      });
+      updateCarPosition({ id, car: { position } });
     },
     [updateCarPosition, id]
   );

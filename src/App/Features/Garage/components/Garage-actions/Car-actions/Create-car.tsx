@@ -7,7 +7,7 @@ interface Props {
 }
 
 function CreateCar({ onClose }: Props) {
-  const { createCarAction, loading } = useManageGarageActions();
+  const { createCarAction } = useManageGarageActions();
   const [updateValues, setUpdateValues] = useState({
     name: "",
     color: "#000000"
@@ -31,10 +31,12 @@ function CreateCar({ onClose }: Props) {
         <ActionsForm values={updateValues} setValues={setUpdateValues} />
       </div>
       <div className="flex flex-row justify-between">
-        <Button disabled={!isFieldsFilled} onClick={submit}>
-          {loading ? "Loading..." : "Update"}
-        </Button>
-        <Button onClick={onClose}>Cancel</Button>
+        <div className="flex flex-row justify-between w-full">
+          <Button disabled={!isFieldsFilled} onClick={submit}>
+            Save
+          </Button>
+          <Button onClick={onClose}>Cancel</Button>
+        </div>
       </div>
     </div>
   );

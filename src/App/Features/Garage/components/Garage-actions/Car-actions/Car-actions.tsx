@@ -6,26 +6,25 @@ import Modal from "../../../../../../common/components/Modal/Modal";
 import { EngineStatus } from "../../../../../../api/Slices/engine/types";
 import IconButton from "../../../../../../common/components/Button/Icon-Button";
 
-type Modal = "update" | "delete";
+type ModalType = "update" | "delete";
 
 interface Props {
   id: number;
 }
+
 function CarActions({ id }: Props) {
-  const [modalType, setModalType] = useState<Modal | null>(null);
+  const [modalType, setModalType] = useState<ModalType | null>(null);
   const car = useGarageStore(state => state.getCar(id));
-  const disableActions =
-    !car ||
-    (car.engine?.status ?? EngineStatus.stopped) !== EngineStatus.stopped || // null -> stopped
-    (car.position ?? 0) !== 0; // null -> 0
+
+  const disableActions = !car || car.engine?.status !== EngineStatus.stopped || (car.position ?? 0) !== 0;
 
   const handleAction = useCallback(
-    (type: Modal) => {
+    (type: ModalType) => {
       if (id) {
         setModalType(type);
       }
     },
-    [id, setModalType]
+    [id]
   );
 
   const modals = useMemo(
@@ -33,7 +32,7 @@ function CarActions({ id }: Props) {
       update: <UpdateCar id={id} onClose={() => setModalType(null)} />,
       delete: <RemoveCar id={id} onClose={() => setModalType(null)} />
     }),
-    [id, setModalType]
+    [id]
   );
 
   return (
@@ -42,7 +41,8 @@ function CarActions({ id }: Props) {
         <IconButton disabled={disableActions} iconSize={16} icon="edit" onClick={() => handleAction("update")} />
         <IconButton disabled={disableActions} iconSize={16} icon="delete" onClick={() => handleAction("delete")} />
       </div>
-      <Modal isOpen={!!modalType}>{modals[modalType!]}</Modal>
+
+      <Modal isOpen={!!modalType}>{modalType && modals[modalType]}</Modal>
     </div>
   );
 }
