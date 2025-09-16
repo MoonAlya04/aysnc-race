@@ -12,8 +12,6 @@ interface Props {
 }
 
 const Table = ({ winnersCount, winnersWithCarName }: Props) => {
-  const pagesLength = Math.ceil(winnersCount / 7);
-
   return (
     <div>
       <table className="w-[600px] bg-white neon-border shadow-md rounded-lg overflow-hidden">
