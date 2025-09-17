@@ -17,7 +17,9 @@ export default class WinnersSlice extends ApiSlice {
 
     const result = {
       ...(rsp as SuccessResponse),
-      data: new GetWinnersResponse((rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>),
+      data: new GetWinnersResponse(
+        (rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>,
+      ),
     };
     return result;
   }
@@ -27,7 +29,9 @@ export default class WinnersSlice extends ApiSlice {
     if (rsp.meta.error) return rsp as FailedResponse;
     const result = {
       ...(rsp as SuccessResponse),
-      data: new Winner((rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>),
+      data: new Winner(
+        (rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>,
+      ),
     };
     return result;
   }
@@ -46,7 +50,9 @@ export default class WinnersSlice extends ApiSlice {
     if (rsp.meta.error) return rsp as FailedResponse;
     const result = {
       ...(rsp as SuccessResponse),
-      data: new Winner((rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>),
+      data: new Winner(
+        (rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>,
+      ),
     };
     return result;
   }
@@ -72,7 +78,9 @@ export default class WinnersSlice extends ApiSlice {
 
     const result = {
       ...(rsp as SuccessResponse),
-      data: new Winner((rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>),
+      data: new Winner(
+        (rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>,
+      ),
     };
     return result;
   }

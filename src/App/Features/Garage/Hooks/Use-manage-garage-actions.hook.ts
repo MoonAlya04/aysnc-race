@@ -10,7 +10,11 @@ export default function useManageGarageActions() {
   }));
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const { createCar: createCarRsp, deleteCar: removeCarRsp, updateCar: updateCarRsp } = useGarageActions();
+  const {
+    createCar: createCarRsp,
+    deleteCar: removeCarRsp,
+    updateCar: updateCarRsp,
+  } = useGarageActions();
   const { reloadOnCreate } = useCars();
 
   const createCarAction = async ({ name, color }: { name: string; color: string }) => {
@@ -52,7 +56,15 @@ export default function useManageGarageActions() {
     removeCar(id);
   };
 
-  const updateCarAction = async ({ id, name, color }: { id: number; name: string; color: string }) => {
+  const updateCarAction = async ({
+    id,
+    name,
+    color,
+  }: {
+    id: number;
+    name: string;
+    color: string;
+  }) => {
     const rsp = await updateCarRsp({
       id,
       name,

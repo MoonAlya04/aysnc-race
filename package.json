@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src --ext .ts,.tsx",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "npx eslint . --ext .ts,.tsx --fix",
     "format": "prettier --write .",
     "ci:format": "prettier --check ."

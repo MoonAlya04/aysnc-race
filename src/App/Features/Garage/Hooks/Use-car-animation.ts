@@ -60,7 +60,8 @@ export default function useCarAnimation({
 
         // Car reached finish
         if (positionRef.current >= roadLength.current) {
-          const elapsed = startTimeRef.current !== null ? (time - startTimeRef.current) / DIVIDER : ZERO;
+          const elapsed =
+            startTimeRef.current !== null ? (time - startTimeRef.current) / DIVIDER : ZERO;
           onReachTheEnd(positionRef.current, +elapsed.toFixed(1));
           return;
         }
@@ -83,7 +84,8 @@ export default function useCarAnimation({
    */
   const handleResize = useCallback((): void => {
     if (carRef.current?.parentElement) {
-      roadLength.current = carRef.current.parentElement.scrollWidth - carRef.current.scrollWidth || ZERO;
+      roadLength.current =
+        carRef.current.parentElement.scrollWidth - carRef.current.scrollWidth || ZERO;
     }
   }, []);
 
@@ -133,7 +135,8 @@ export default function useCarAnimation({
 
     // Calculate road length
     if (carRef.current?.parentElement) {
-      roadLength.current = carRef.current.parentElement.scrollWidth - carRef.current.scrollWidth || ZERO;
+      roadLength.current =
+        carRef.current.parentElement.scrollWidth - carRef.current.scrollWidth || ZERO;
     }
 
     window.addEventListener('resize', handleResize);
@@ -176,7 +179,16 @@ export default function useCarAnimation({
         animationId.current = null;
       }
     };
-  }, [condition, speed, animate, handleResize, status, handlePosition, initialPosition, raceInProgress]);
+  }, [
+    condition,
+    speed,
+    animate,
+    handleResize,
+    status,
+    handlePosition,
+    initialPosition,
+    raceInProgress,
+  ]);
 
   return { carRef };
 }

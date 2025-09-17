@@ -14,7 +14,9 @@ export default class GarageSlice extends ApiSlice {
     if (rsp.meta.error) return rsp as FailedResponse;
     const result = {
       ...(rsp as SuccessResponse),
-      data: new GetCarsResponse((rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>),
+      data: new GetCarsResponse(
+        (rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>,
+      ),
     };
     return result;
   }
@@ -25,7 +27,9 @@ export default class GarageSlice extends ApiSlice {
 
     const result = {
       ...(rsp as SuccessResponse),
-      data: new Car((rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>),
+      data: new Car(
+        (rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>,
+      ),
     };
     return result;
   }
@@ -44,7 +48,9 @@ export default class GarageSlice extends ApiSlice {
     if (rsp.meta.error) return rsp as FailedResponse;
     const result = {
       ...(rsp as SuccessResponse),
-      data: new Car((rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>),
+      data: new Car(
+        (rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>,
+      ),
     };
     return result;
   }
@@ -63,7 +69,9 @@ export default class GarageSlice extends ApiSlice {
     if (rsp.meta.error) return rsp as FailedResponse;
     const result = {
       ...(rsp as SuccessResponse),
-      data: new Car((rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>),
+      data: new Car(
+        (rsp.data && typeof rsp.data === 'object' ? rsp.data : {}) as Record<string, unknown>,
+      ),
     };
     return result;
   }

@@ -74,7 +74,9 @@ const useGarageStore = create<GarageStoreState & GarageStoreAction>()(
         set(state => ({
           cars: {
             ...state.cars,
-            [state.activePage]: state.cars[state.activePage].map(c => (c.id === id ? { ...c, engine } : c)),
+            [state.activePage]: state.cars[state.activePage].map(c =>
+              c.id === id ? { ...c, engine } : c,
+            ),
           },
         }));
       },

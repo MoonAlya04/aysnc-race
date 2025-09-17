@@ -16,7 +16,8 @@ function CarActions({ id }: Props) {
   const [modalType, setModalType] = useState<ModalType | null>(null);
   const car = useGarageStore(state => state.getCar(id));
 
-  const disableActions = !car || car.engine?.status !== EngineStatus.stopped || (car.position ?? 0) !== 0;
+  const disableActions =
+    !car || car.engine?.status !== EngineStatus.stopped || (car.position ?? 0) !== 0;
 
   const handleAction = useCallback(
     (type: ModalType) => {
@@ -38,8 +39,18 @@ function CarActions({ id }: Props) {
   return (
     <div>
       <div className="flex flex-col space-y-2 items-center">
-        <IconButton disabled={disableActions} iconSize={16} icon="edit" onClick={() => handleAction('update')} />
-        <IconButton disabled={disableActions} iconSize={16} icon="delete" onClick={() => handleAction('delete')} />
+        <IconButton
+          disabled={disableActions}
+          iconSize={16}
+          icon="edit"
+          onClick={() => handleAction('update')}
+        />
+        <IconButton
+          disabled={disableActions}
+          iconSize={16}
+          icon="delete"
+          onClick={() => handleAction('delete')}
+        />
       </div>
 
       <Modal isOpen={!!modalType}>{modalType && modals[modalType]}</Modal>

@@ -3,21 +3,24 @@ import { Callbacks } from '../../../../common/types';
 import { useCallback } from 'react';
 
 export default function useGarageActions() {
-  const createCar = useCallback(async ({ name, color, callbacks }: { name: string; color: string; callbacks?: Callbacks }) => {
-    callbacks?.beforeAPICall?.();
-    const rsp = await Api.garage.CreateCar({ name, color });
-    callbacks?.afterAPICall?.();
-    if (rsp.meta.error) {
+  const createCar = useCallback(
+    async ({ name, color, callbacks }: { name: string; color: string; callbacks?: Callbacks }) => {
+      callbacks?.beforeAPICall?.();
+      const rsp = await Api.garage.CreateCar({ name, color });
+      callbacks?.afterAPICall?.();
+      if (rsp.meta.error) {
+        return {
+          error: rsp.meta.error.message,
+          data: null,
+        };
+      }
       return {
-        error: rsp.meta.error.message,
-        data: null,
+        error: null,
+        data: rsp.data,
       };
-    }
-    return {
-      error: null,
-      data: rsp.data,
-    };
-  }, []);
+    },
+    [],
+  );
 
   const deleteCar = useCallback(async ({ id, callbacks }: { id: number; callbacks: Callbacks }) => {
     callbacks.beforeAPICall?.();
@@ -36,7 +39,17 @@ export default function useGarageActions() {
   }, []);
 
   const updateCar = useCallback(
-    async ({ id, name, color, callbacks }: { id: number; name: string; color: string; callbacks: Callbacks }) => {
+    async ({
+      id,
+      name,
+      color,
+      callbacks,
+    }: {
+      id: number;
+      name: string;
+      color: string;
+      callbacks: Callbacks;
+    }) => {
       callbacks.beforeAPICall?.();
       const rsp = await Api.garage.UpdateCar({ id, name, color });
       callbacks.afterAPICall?.();

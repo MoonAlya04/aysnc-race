@@ -16,7 +16,15 @@ export function useEngineActions() {
   const [loading, setLoading] = useState(false);
 
   const updateCarEngine = useCallback(
-    async ({ id, status, reset }: { id: number; status: EngineStatus.started | EngineStatus.stopped; reset?: boolean }) => {
+    async ({
+      id,
+      status,
+      reset,
+    }: {
+      id: number;
+      status: EngineStatus.started | EngineStatus.stopped;
+      reset?: boolean;
+    }) => {
       const engineStatusRsp = await patchCarEngine({
         id,
         status,
@@ -64,7 +72,15 @@ export function useEngineActions() {
         status: engineStatusRsp.data?.status ?? EngineStatus.stopped,
       };
     },
-    [patchCarEngine, setLoading, setError, updateCarEngineInStore, patchEngineStatus, updateCarStatus, updateCar],
+    [
+      patchCarEngine,
+      setLoading,
+      setError,
+      updateCarEngineInStore,
+      patchEngineStatus,
+      updateCarStatus,
+      updateCar,
+    ],
   );
 
   return {

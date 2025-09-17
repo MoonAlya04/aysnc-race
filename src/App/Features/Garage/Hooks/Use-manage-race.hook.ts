@@ -12,13 +12,14 @@ export default function useManageRace() {
 
   const onGoingRace = useRef<boolean>(false);
 
-  const { raceWinnerId, setRaceWinnerId, setRaceType, raceType, setRaceInProgress } = useWinnerStore(state => ({
-    raceWinnerId: state.raceWinnerId,
-    setRaceWinnerId: state.setRaceWinnerId,
-    setRaceType: state.setRaceType,
-    raceType: state.raceType,
-    setRaceInProgress: state.setRaceInProgress,
-  }));
+  const { raceWinnerId, setRaceWinnerId, setRaceType, raceType, setRaceInProgress } =
+    useWinnerStore(state => ({
+      raceWinnerId: state.raceWinnerId,
+      setRaceWinnerId: state.setRaceWinnerId,
+      setRaceType: state.setRaceType,
+      raceType: state.raceType,
+      setRaceInProgress: state.setRaceInProgress,
+    }));
 
   const { updateCarEngine } = useEngineActions();
 
@@ -50,7 +51,15 @@ export default function useManageRace() {
     if (raceWinnerId) {
       setRaceWinnerId(null);
     }
-  }, [cars, updateCarEngine, resetCarsInStore, raceWinnerId, setRaceWinnerId, setRaceType, setRaceInProgress]);
+  }, [
+    cars,
+    updateCarEngine,
+    resetCarsInStore,
+    raceWinnerId,
+    setRaceWinnerId,
+    setRaceType,
+    setRaceInProgress,
+  ]);
 
   const canReset = !!cars?.some(car => car.position > 0) && onGoingRace.current;
 

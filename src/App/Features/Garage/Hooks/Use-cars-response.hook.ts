@@ -21,22 +21,25 @@ export function useCarsResponse() {
     [],
   );
 
-  const getCarResponse = useCallback(async ({ id, callbacks }: { id: number; callbacks: Callbacks }) => {
-    callbacks.beforeAPICall?.();
-    const rsp = await Api.garage.GetCar({ id });
-    callbacks.afterAPICall?.();
-    if (rsp.meta.error) {
-      return {
-        error: rsp.meta.error,
-        data: null,
-      };
-    }
+  const getCarResponse = useCallback(
+    async ({ id, callbacks }: { id: number; callbacks: Callbacks }) => {
+      callbacks.beforeAPICall?.();
+      const rsp = await Api.garage.GetCar({ id });
+      callbacks.afterAPICall?.();
+      if (rsp.meta.error) {
+        return {
+          error: rsp.meta.error,
+          data: null,
+        };
+      }
 
-    return {
-      error: null,
-      data: rsp.data,
-    };
-  }, []);
+      return {
+        error: null,
+        data: rsp.data,
+      };
+    },
+    [],
+  );
 
   return { getCarsResponse, getCarResponse };
 }

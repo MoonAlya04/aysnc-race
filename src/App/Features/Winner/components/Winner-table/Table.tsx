@@ -17,7 +17,11 @@ const Table = ({ winnersWithCarName }: Props) => {
         <TableHead />
         <tbody>
           {winnersWithCarName.map((winner, index) => (
-            <TableRow key={`winner-${winner.id}-${index}`} winner={winner} carName={winner.carName} />
+            <TableRow
+              key={`winner-${winner.id}-${index}`}
+              winner={winner}
+              carName={winner.carName}
+            />
           ))}
         </tbody>
       </table>

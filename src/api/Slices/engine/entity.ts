@@ -11,7 +11,8 @@ export class EngineResponse {
     this.velocity = typeof json.velocity === 'number' ? json.velocity : DEFAULT_VELOCITY;
     this.distance = typeof json.distance === 'number' ? json.distance : DEFAULT_DISTANCE;
     this.status =
-      typeof json.status === 'string' && (json.status === EngineStatus.drive || json.status === EngineStatus.started)
+      typeof json.status === 'string' &&
+      (json.status === EngineStatus.drive || json.status === EngineStatus.started)
         ? json.status
         : EngineStatus.stopped;
   }

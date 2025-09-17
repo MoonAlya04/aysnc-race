@@ -18,7 +18,10 @@ function WinnerTable() {
   const [page, setPage] = useState(1); // ✅ added
   const winnersPerPage = 10; // or your API limit / hook value
 
-  const getCarName = useCallback((id: number) => cars.find(car => car.id === id)?.name || '', [cars]);
+  const getCarName = useCallback(
+    (id: number) => cars.find(car => car.id === id)?.name || '',
+    [cars],
+  );
 
   const winnersWithCarName = mergeAndSumWins(
     winners.map(winner => ({
@@ -46,7 +49,14 @@ function WinnerTable() {
         <EmptyTable />
       )}
 
-      {isThereWinner && <Pagination onPageChange={setPage} carsCount={totalWinners} page={page} pagesLength={pagesLength} />}
+      {isThereWinner && (
+        <Pagination
+          onPageChange={setPage}
+          carsCount={totalWinners}
+          page={page}
+          pagesLength={pagesLength}
+        />
+      )}
     </div>
   );
 }

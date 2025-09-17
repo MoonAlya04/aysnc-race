@@ -11,7 +11,8 @@ import Loading from '../../../../../common/components/Loading-indicator/Loading'
 
 const RaceTrack = () => {
   const { cars, loading, setActivePage, activePage, carsCount, pagesLength } = useCars();
-  const { announceWinner, raceType, raceWinnerId, setShowWinner, showWinner, getWinner } = useAnnounceWinner();
+  const { announceWinner, raceType, raceWinnerId, setShowWinner, showWinner, getWinner } =
+    useAnnounceWinner();
 
   const showPagination = pagesLength > 1;
 
@@ -45,9 +46,18 @@ const RaceTrack = () => {
           <Loading size={60} />
         ) : (
           cars?.map(car => (
-            <GarageActions key={`track-${car.id}`} id={car.id} engineStatus={car.engine?.status ?? 'stopped'}>
+            <GarageActions
+              key={`track-${car.id}`}
+              id={car.id}
+              engineStatus={car.engine?.status ?? 'stopped'}
+            >
               <RaceLine condition={car.condition ?? 'idle'} name={car.name ?? 'Unknown'}>
-                <Car car={car} announceWinner={announceWinner} winnerId={raceWinnerId} raceType={raceType} />
+                <Car
+                  car={car}
+                  announceWinner={announceWinner}
+                  winnerId={raceWinnerId}
+                  raceType={raceType}
+                />
               </RaceLine>
             </GarageActions>
           ))
@@ -55,11 +65,20 @@ const RaceTrack = () => {
       </div>
 
       <Modal isOpen={openWinnerModal}>
-        <WinnerModal name={winnerCarName} time={winnerCarTime} onClose={() => setShowWinner(false)} />
+        <WinnerModal
+          name={winnerCarName}
+          time={winnerCarTime}
+          onClose={() => setShowWinner(false)}
+        />
       </Modal>
 
       {showPagination && (
-        <Pagination onPageChange={setActivePage} carsCount={carsCount} page={activePage} pagesLength={pagesLength} />
+        <Pagination
+          onPageChange={setActivePage}
+          carsCount={carsCount}
+          page={activePage}
+          pagesLength={pagesLength}
+        />
       )}
     </div>
   );

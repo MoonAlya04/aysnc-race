@@ -5,14 +5,16 @@ import useGarageStore from '../Store/Usa-garage-store';
 const limit = 7;
 
 export default function useCars() {
-  const { cars, setCars, setCarsCount, carsCount, setActivePage, activePage } = useGarageStore(state => ({
-    cars: state.cars,
-    setCars: state.setCars,
-    setCarsCount: state.setCarsCount,
-    carsCount: state.carsCount,
-    setActivePage: state.setActivePage,
-    activePage: state.activePage,
-  }));
+  const { cars, setCars, setCarsCount, carsCount, setActivePage, activePage } = useGarageStore(
+    state => ({
+      cars: state.cars,
+      setCars: state.setCars,
+      setCarsCount: state.setCarsCount,
+      carsCount: state.carsCount,
+      setActivePage: state.setActivePage,
+      activePage: state.activePage,
+    }),
+  );
 
   const [hasInitializedStore, setHasInitializedStore] = useState(false);
   const [error, setError] = useState<string | null>(null);

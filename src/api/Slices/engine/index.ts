@@ -6,7 +6,13 @@ import { EngineStatus } from './types';
 export default class EngineSlice extends ApiSlice {
   static baseURL = ApiSlice.baseURL + '/engine';
 
-  static async PatchCarEngine({ id, status }: { id: number; status: EngineStatus.started | EngineStatus.stopped }) {
+  static async PatchCarEngine({
+    id,
+    status,
+  }: {
+    id: number;
+    status: EngineStatus.started | EngineStatus.stopped;
+  }) {
     // only pass the query string, ApiSlice will prepend baseURL
     const rsp = await this.request(`?id=${id}&status=${status}`, 'PATCH');
     if (rsp.meta.error) return rsp as FailedResponse;

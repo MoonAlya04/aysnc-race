@@ -28,7 +28,15 @@ function UpdateCar({ id, onClose }: Props) {
       });
     }
     onClose();
-  }, [id, isFieldsFilled, onClose, updateCarAction, updateValues.color, updateValues.name, fieldsAreChanged]);
+  }, [
+    id,
+    isFieldsFilled,
+    onClose,
+    updateCarAction,
+    updateValues.color,
+    updateValues.name,
+    fieldsAreChanged,
+  ]);
 
   return (
     <div className="bg-white p-6 flex-flex-col space-y-4 rounded-2xl">
