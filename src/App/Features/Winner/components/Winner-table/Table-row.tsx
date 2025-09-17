@@ -1,5 +1,5 @@
-import { Winner } from "../../../../../api/Slices/winners/entity";
-import React from "react";
+import { Winner } from '../../../../../api/Slices/winners/entity';
+import React from 'react';
 
 interface Props {
   winner: Winner;

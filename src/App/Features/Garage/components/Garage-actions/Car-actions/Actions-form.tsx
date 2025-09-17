@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
   values: { name: string; color: string };
@@ -35,7 +35,7 @@ function ActionsForm({ values, setValues }: Props) {
           onChange={e =>
             setValues({
               ...values,
-              color: e.target.value
+              color: e.target.value,
             })
           }
         />

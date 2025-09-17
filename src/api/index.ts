@@ -1,7 +1,7 @@
-import ApiSlice from "./slice";
-import EngineSlice from "./Slices/engine/index";
-import GarageSlice from "./Slices/garage/index";
-import WinnersSlice from "./Slices/winners/index";
+import ApiSlice from './slice';
+import EngineSlice from './Slices/engine';
+import GarageSlice from './Slices/garage';
+import WinnersSlice from './Slices/winners';
 
 class Api extends ApiSlice {
   static garage = GarageSlice;

@@ -1,5 +1,5 @@
-import Icon from "../Icon/Icon";
-import { IconName } from "../Icon/Icon-data";
+import Icon from '../Icon/Icon';
+import { IconName } from '../Icon/Icon-data';
 
 interface Props {
   icon: IconName;
@@ -13,7 +13,7 @@ function IconButton({ icon, onClick, iconSize, disabled }: Props) {
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`p-2 border border-black rounded-full ${disabled ? "bg-gray-200" : "bg-white hover:bg-gray-100"}`}
+      className={`p-2 border border-black rounded-full ${disabled ? 'bg-gray-200' : 'bg-white hover:bg-gray-100'}`}
     >
       <Icon name={icon} size={iconSize} />
     </button>

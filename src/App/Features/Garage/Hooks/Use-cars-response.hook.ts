@@ -1,6 +1,6 @@
-import Api from "../../../../api/index";
-import { Callbacks } from "../../../../common/types";
-import { useCallback } from "react";
+import Api from '../../../../api/index';
+import { Callbacks } from '../../../../common/types';
+import { useCallback } from 'react';
 export function useCarsResponse() {
   const getCarsResponse = useCallback(
     async ({ page, limit, callbacks }: { page?: number; limit?: number; callbacks: Callbacks }) => {
@@ -10,15 +10,15 @@ export function useCarsResponse() {
       if (rsp.meta.error) {
         return {
           error: rsp.meta.error,
-          data: null
+          data: null,
         };
       }
       return {
         error: null,
-        data: rsp.data
+        data: rsp.data,
       };
     },
-    []
+    [],
   );
 
   const getCarResponse = useCallback(async ({ id, callbacks }: { id: number; callbacks: Callbacks }) => {
@@ -28,13 +28,13 @@ export function useCarsResponse() {
     if (rsp.meta.error) {
       return {
         error: rsp.meta.error,
-        data: null
+        data: null,
       };
     }
 
     return {
       error: null,
-      data: rsp.data
+      data: rsp.data,
     };
   }, []);
 

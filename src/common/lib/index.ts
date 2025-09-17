@@ -1,4 +1,4 @@
-import { WinnerWithName } from "../../App/Features/Winner/components/Winner-table/Winner-table";
+import { WinnerWithName } from '../../App/Features/Winner/components/Winner-table/Winner-table';
 
 export function mergeAndSumWins(winners: WinnerWithName[]): WinnerWithName[] {
   const aggregatedCars = winners.reduce(
@@ -12,7 +12,7 @@ export function mergeAndSumWins(winners: WinnerWithName[]): WinnerWithName[] {
       }
       return acc;
     },
-    {} as Record<string, WinnerWithName>
+    {} as Record<string, WinnerWithName>,
   );
 
   return Object.values(aggregatedCars);

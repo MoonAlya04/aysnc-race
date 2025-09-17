@@ -1,31 +1,29 @@
-import { Linter } from "eslint";
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 
-const config = {
-  root: true,
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    project: "./tsconfig.json",
-    tsconfigRootDir: __dirname,
-    ecmaVersion: 2021,
-    sourceType: "module",
-  },
-  plugins: ["@typescript-eslint", "import"],
-  extends: [
-    "airbnb-typescript",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript",
-  ],
-  rules: {
-    "import/prefer-default-export": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-  },
-  settings: {
-    "import/resolver": {
-      typescript: {},
+export default tseslint.config(js.configs.recommended, ...tseslint.configs.recommended, {
+  files: ['**/*.{js,jsx,ts,tsx}'],
+  languageOptions: {
+    parser: tseslint.parser,
+    parserOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      ecmaFeatures: { jsx: true },
     },
   },
-};
-
-export default config;
+  plugins: {
+    react,
+    'react-hooks': reactHooks,
+    'jsx-a11y': jsxA11y,
+  },
+  rules: {
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+  },
+  settings: {
+    react: { version: 'detect' },
+  },
+});

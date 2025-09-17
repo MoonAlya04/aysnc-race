@@ -1,4 +1,4 @@
 export enum CarCondition {
-  broken = "broken",
-  running = "running"
+  broken = 'broken',
+  running = 'running',
 }

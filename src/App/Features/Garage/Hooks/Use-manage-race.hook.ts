@@ -1,13 +1,13 @@
-import { useCallback, useRef } from "react";
-import useGarageStore from "../Store/Usa-garage-store";
-import useWinnerStore from "../Store/Use-winner-store";
-import { EngineStatus } from "../../../../api/Slices/engine/types";
-import { useEngineActions } from "./Use-engine.hook";
+import { useCallback, useRef } from 'react';
+import useGarageStore from '../Store/Usa-garage-store';
+import useWinnerStore from '../Store/Use-winner-store';
+import { EngineStatus } from '../../../../api/Slices/engine/types';
+import { useEngineActions } from './Use-engine.hook';
 
 export default function useManageRace() {
   const { cars, resetCarsInStore } = useGarageStore(state => ({
     cars: state.cars[String(state.activePage)],
-    resetCarsInStore: state.resetCars
+    resetCarsInStore: state.resetCars,
   }));
 
   const onGoingRace = useRef<boolean>(false);
@@ -17,7 +17,7 @@ export default function useManageRace() {
     setRaceWinnerId: state.setRaceWinnerId,
     setRaceType: state.setRaceType,
     raceType: state.raceType,
-    setRaceInProgress: state.setRaceInProgress
+    setRaceInProgress: state.setRaceInProgress,
   }));
 
   const { updateCarEngine } = useEngineActions();
@@ -25,7 +25,7 @@ export default function useManageRace() {
   const handleAllCarsEngineActions = useCallback(async () => {
     if (!cars || cars.length === 0) return;
 
-    setRaceType("multi");
+    setRaceType('multi');
     setRaceInProgress(true);
 
     const actions = cars.map(car => updateCarEngine({ id: car.id, status: EngineStatus.started }));

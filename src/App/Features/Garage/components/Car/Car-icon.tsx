@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 type Props = { size?: number | string; color?: string };
 
-export default function GetCar({ size = 128, color = "currentColor" }: Props) {
+export default function GetCar({ size = 128, color = 'currentColor' }: Props) {
   return (
     <svg viewBox="0 0 256 128" width={size} height={size} xmlns="http://www.w3.org/2000/svg" style={{ color }}>
       <path

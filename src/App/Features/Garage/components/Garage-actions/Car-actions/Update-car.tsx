@@ -1,8 +1,8 @@
-import { useCallback, useState } from "react";
-import useGarageStore from "../../../Store/Usa-garage-store";
-import Button from "../../../../../../common/components/Button/Buttons";
-import useManageGarageActions from "../../../Hooks/Use-manage-garage-actions.hook";
-import ActionsForm from "./Actions-form";
+import { useCallback, useState } from 'react';
+import useGarageStore from '../../../Store/Usa-garage-store';
+import Button from '../../../../../../common/components/Button/Buttons';
+import useManageGarageActions from '../../../Hooks/Use-manage-garage-actions.hook';
+import ActionsForm from './Actions-form';
 
 interface Props {
   id: number;
@@ -12,8 +12,8 @@ function UpdateCar({ id, onClose }: Props) {
   const car = useGarageStore(state => state.getCar(id));
   const { updateCarAction, loading } = useManageGarageActions();
   const [updateValues, setUpdateValues] = useState({
-    name: car?.name || "",
-    color: car?.color || "#000000"
+    name: car?.name || '',
+    color: car?.color || '#000000',
   });
 
   const isFieldsFilled = updateValues.name && updateValues.color;
@@ -24,7 +24,7 @@ function UpdateCar({ id, onClose }: Props) {
       await updateCarAction({
         id,
         name: updateValues.name!,
-        color: updateValues.color!
+        color: updateValues.color!,
       });
     }
     onClose();
@@ -37,7 +37,7 @@ function UpdateCar({ id, onClose }: Props) {
       </div>
       <div className="flex flex-row justify-between">
         <Button disabled={!isFieldsFilled} onClick={submit}>
-          {loading ? "Loading..." : "Update"}
+          {loading ? 'Loading...' : 'Update'}
         </Button>
         <Button onClick={onClose}>Cancel</Button>
       </div>

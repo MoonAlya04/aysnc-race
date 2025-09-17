@@ -1,4 +1,4 @@
-import Button from "../../../../../common/components/Button/Buttons";
+import Button from '../../../../../common/components/Button/Buttons';
 
 interface Props {
   time: string;

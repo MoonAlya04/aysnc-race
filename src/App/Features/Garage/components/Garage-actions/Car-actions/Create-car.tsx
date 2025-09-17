@@ -1,7 +1,7 @@
-import { useCallback, useState } from "react";
-import useManageGarageActions from "../../../Hooks/Use-manage-garage-actions.hook";
-import ActionsForm from "./Actions-form";
-import Button from "../../../../../../common/components/Button/Buttons";
+import { useCallback, useState } from 'react';
+import useManageGarageActions from '../../../Hooks/Use-manage-garage-actions.hook';
+import ActionsForm from './Actions-form';
+import Button from '../../../../../../common/components/Button/Buttons';
 interface Props {
   onClose: () => void;
 }
@@ -9,8 +9,8 @@ interface Props {
 function CreateCar({ onClose }: Props) {
   const { createCarAction } = useManageGarageActions();
   const [updateValues, setUpdateValues] = useState({
-    name: "",
-    color: "#000000"
+    name: '',
+    color: '#000000',
   });
 
   const isFieldsFilled = updateValues.name && updateValues.color;
@@ -19,7 +19,7 @@ function CreateCar({ onClose }: Props) {
     if (isFieldsFilled) {
       await createCarAction({
         name: updateValues.name!,
-        color: updateValues.color!
+        color: updateValues.color!,
       });
     }
     onClose();

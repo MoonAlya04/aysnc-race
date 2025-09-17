@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { createPortal } from "react-dom";
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface Props {
   isOpen: boolean;
@@ -12,11 +12,10 @@ function Modal({ children, isOpen }: Props) {
 
     return () => {
       document.body.style.overflow = '';
-    }
-  }, [isOpen])
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
-
 
   return createPortal(
     <div
@@ -25,10 +24,8 @@ function Modal({ children, isOpen }: Props) {
     >
       {children}
     </div>,
-    document.getElementById("modal-portal")!
+    document.getElementById('modal-portal')!,
   );
-
 }
-
 
 export default Modal;

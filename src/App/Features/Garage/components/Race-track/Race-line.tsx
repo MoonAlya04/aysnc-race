@@ -1,5 +1,5 @@
-import { CarCondition } from "../../../../../api/Slices/garage/types";
-import React, { PropsWithChildren } from "react";
+import { CarCondition } from '../../../../../api/Slices/garage/types';
+import React, { PropsWithChildren } from 'react';
 
 interface Props {
   condition: CarCondition;
@@ -11,7 +11,7 @@ const RaceLine = ({ condition, name, children }: PropsWithChildren<Props>) => {
     <div className="relative w-full h-full items-center flex">
       <div
         className={`absolute top-1 left-1 p-1 text-[8px] text-white rounded-md ${
-          condition === "running" ? "bg-green-500" : "bg-red-500 animate-blink"
+          condition === 'running' ? 'bg-green-500' : 'bg-red-500 animate-blink'
         }`}
       >
         {condition}
@@ -20,7 +20,7 @@ const RaceLine = ({ condition, name, children }: PropsWithChildren<Props>) => {
         <h1
           className="text-white font-bold text-6xl opacity-30 text-shadow-custom max-w-[400px] truncate"
           title={name}
-          style={{ wordBreak: "break-all" }}
+          style={{ wordBreak: 'break-all' }}
         >
           {name}
         </h1>

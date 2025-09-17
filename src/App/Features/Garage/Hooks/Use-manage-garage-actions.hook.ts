@@ -1,12 +1,12 @@
-import { useState } from "react";
-import useCars from "./Use-cars-hook";
-import useGarageStore from "../Store/Usa-garage-store";
-import useGarageActions from "./Use-garage-actions";
+import { useState } from 'react';
+import useCars from './Use-cars-hook';
+import useGarageStore from '../Store/Usa-garage-store';
+import useGarageActions from './Use-garage-actions';
 
 export default function useManageGarageActions() {
   const { removeCar, updateCar } = useGarageStore(state => ({
     removeCar: state.removeCar,
-    updateCar: state.updateCar
+    updateCar: state.updateCar,
   }));
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -23,8 +23,8 @@ export default function useManageGarageActions() {
         },
         afterAPICall: () => {
           setLoading(false);
-        }
-      }
+        },
+      },
     });
     if (rsp.error) {
       setError(rsp.error);
@@ -42,8 +42,8 @@ export default function useManageGarageActions() {
         },
         afterAPICall: () => {
           setLoading(false);
-        }
-      }
+        },
+      },
     });
     if (rsp.error) {
       setError(rsp.error);
@@ -63,8 +63,8 @@ export default function useManageGarageActions() {
         },
         afterAPICall: () => {
           setLoading(false);
-        }
-      }
+        },
+      },
     });
     if (rsp.error) {
       setError(rsp.error);
@@ -73,7 +73,7 @@ export default function useManageGarageActions() {
     if (rsp.data) {
       updateCar({
         id,
-        car: rsp.data
+        car: rsp.data,
       });
     }
   };
@@ -83,6 +83,6 @@ export default function useManageGarageActions() {
     removeCarAction,
     updateCarAction,
     error,
-    loading
+    loading,
   };
 }

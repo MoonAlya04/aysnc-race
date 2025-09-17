@@ -1,7 +1,7 @@
-import { useCallback } from "react";
-import useGarageActions from "./Use-garage-actions";
-import useCars from "./Use-cars-hook";
-import { carModels } from "../../../../common/lib/constants";
+import { useCallback } from 'react';
+import useGarageActions from './Use-garage-actions';
+import useCars from './Use-cars-hook';
+import { carModels } from '../../../../common/lib/constants';
 
 export default function useGenerateCars() {
   const cars = generateRandomCars();
@@ -12,8 +12,8 @@ export default function useGenerateCars() {
     const actions = cars.map(car =>
       createCar({
         name: car.name,
-        color: car.color
-      })
+        color: car.color,
+      }),
     );
 
     const data = await Promise.all(actions);
@@ -32,8 +32,8 @@ const getRandomCarName = (): string => {
 };
 
 const getRandomColor = (): string => {
-  const hexChars = "0123456789ABCDEF";
-  let color = "#";
+  const hexChars = '0123456789ABCDEF';
+  let color = '#';
   for (let i = 0; i < 6; i++) {
     color += hexChars[Math.floor(Math.random() * 16)];
   }
@@ -45,7 +45,7 @@ const generateRandomCars = () => {
   for (let i = 1; i <= 100; i++) {
     const car = {
       name: getRandomCarName(),
-      color: getRandomColor()
+      color: getRandomColor(),
     };
     cars.push(car);
   }

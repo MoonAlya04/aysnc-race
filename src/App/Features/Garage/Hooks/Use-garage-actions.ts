@@ -1,6 +1,6 @@
-import Api from "../../../../api/index";
-import { Callbacks } from "../../../../common/types";
-import { useCallback } from "react";
+import Api from '../../../../api/index';
+import { Callbacks } from '../../../../common/types';
+import { useCallback } from 'react';
 
 export default function useGarageActions() {
   const createCar = useCallback(async ({ name, color, callbacks }: { name: string; color: string; callbacks?: Callbacks }) => {
@@ -10,12 +10,12 @@ export default function useGarageActions() {
     if (rsp.meta.error) {
       return {
         error: rsp.meta.error.message,
-        data: null
+        data: null,
       };
     }
     return {
       error: null,
-      data: rsp.data
+      data: rsp.data,
     };
   }, []);
 
@@ -26,12 +26,12 @@ export default function useGarageActions() {
     if (rsp.meta.error) {
       return {
         error: rsp.meta.error.message,
-        data: null
+        data: null,
       };
     }
     return {
       error: null,
-      data: rsp.data
+      data: rsp.data,
     };
   }, []);
 
@@ -43,19 +43,19 @@ export default function useGarageActions() {
       if (rsp.meta.error) {
         return {
           error: rsp.meta.error.message,
-          data: null
+          data: null,
         };
       }
       return {
         error: null,
-        data: rsp.data
+        data: rsp.data,
       };
     },
-    []
+    [],
   );
   return {
     createCar,
     deleteCar,
-    updateCar
+    updateCar,
   };
 }

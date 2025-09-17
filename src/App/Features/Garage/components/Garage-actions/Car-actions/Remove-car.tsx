@@ -1,7 +1,7 @@
-import Button from "../../../../../../common/components/Button/Buttons";
-import React, { useCallback } from "react";
-import useGarageStore from "../../../Store/Usa-garage-store";
-import useManageGarageActions from "../../../Hooks/Use-manage-garage-actions.hook";
+import Button from '../../../../../../common/components/Button/Buttons';
+import React, { useCallback } from 'react';
+import useGarageStore from '../../../Store/Usa-garage-store';
+import useManageGarageActions from '../../../Hooks/Use-manage-garage-actions.hook';
 
 interface Props {
   id: number;
@@ -10,7 +10,7 @@ interface Props {
 function RemoveCar({ id, onClose }: Props) {
   const { removeCarAction } = useManageGarageActions();
   const { car } = useGarageStore(state => ({
-    car: state.getCar(id)
+    car: state.getCar(id),
   }));
 
   const handleRemoveCar = useCallback(async () => {

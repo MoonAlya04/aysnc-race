@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import { useCarsResponse } from "./Use-cars-response.hook";
-import useGarageStore from "../Store/Usa-garage-store";
+import { useCallback, useEffect, useState } from 'react';
+import { useCarsResponse } from './Use-cars-response.hook';
+import useGarageStore from '../Store/Usa-garage-store';
 
 const limit = 7;
 
@@ -11,7 +11,7 @@ export default function useCars() {
     setCarsCount: state.setCarsCount,
     carsCount: state.carsCount,
     setActivePage: state.setActivePage,
-    activePage: state.activePage
+    activePage: state.activePage,
   }));
 
   const [hasInitializedStore, setHasInitializedStore] = useState(false);
@@ -30,8 +30,8 @@ export default function useCars() {
           },
           afterAPICall: () => {
             setLoading(false);
-          }
-        }
+          },
+        },
       });
 
       if (rsp.error) {
@@ -41,13 +41,13 @@ export default function useCars() {
       if (rsp.data) {
         setCars({
           ...cars,
-          [page.toString()]: rsp.data.items
+          [page.toString()]: rsp.data.items,
         });
         setCarsCount(rsp.data.length);
         setActivePage(page);
       }
     },
-    [getCarsResponse, setCars, cars, setCarsCount, setActivePage]
+    [getCarsResponse, setCars, cars, setCarsCount, setActivePage],
   );
 
   const reloadOnCreate = useCallback(() => {
@@ -55,7 +55,7 @@ export default function useCars() {
   }, [getCars, activePage]);
 
   useEffect(() => {
-    if (!hasInitializedStore && typeof window !== "undefined") {
+    if (!hasInitializedStore && typeof window !== 'undefined') {
       setHasInitializedStore(true);
     }
     if (hasInitializedStore && !cars[activePage]?.length) {
@@ -73,6 +73,6 @@ export default function useCars() {
     carsCount,
     error,
     reloadOnCreate,
-    pagesLength
+    pagesLength,
   };
 }

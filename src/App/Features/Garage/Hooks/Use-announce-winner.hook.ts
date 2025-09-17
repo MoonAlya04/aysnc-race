@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react";
-import useWinnerStore from "../Store/Use-winner-store";
+import { useCallback, useState } from 'react';
+import useWinnerStore from '../Store/Use-winner-store';
 
 export default function useAnnounceWinner() {
   const [showWinner, setShowWinner] = useState(false);
@@ -7,7 +7,7 @@ export default function useAnnounceWinner() {
     raceWinnerId: state.raceWinnerId,
     setRaceWinnerId: state.setRaceWinnerId,
     raceType: state.raceType,
-    getWinner: state.getWinner
+    getWinner: state.getWinner,
   }));
 
   const announceWinner = useCallback(
@@ -15,7 +15,7 @@ export default function useAnnounceWinner() {
       setRaceWinnerId(id);
       setShowWinner(true);
     },
-    [setRaceWinnerId, setShowWinner]
+    [setRaceWinnerId, setShowWinner],
   );
 
   return { showWinner, setShowWinner, raceType, raceWinnerId, announceWinner, getWinner };

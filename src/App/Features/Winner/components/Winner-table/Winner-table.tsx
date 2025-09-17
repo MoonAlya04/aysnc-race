@@ -1,10 +1,11 @@
-import Loading from "../../../../../common/components/Loading-indicator/Loading";
-import useCars from "../../../../../App/Features/Garage/Hooks/Use-cars-hook";
-import { WinnerWithCarId } from "../../../../../App/Features/Garage/Store/Use-winner-store";
-import { useCallback } from "react";
-import useWinnersTable from "../../Hooks/Use-winners-table.hook";
-import Table from "./Table";
-import { mergeAndSumWins } from "../../../../../common/lib/index";
+import Loading from '../../../../../common/components/Loading-indicator/Loading';
+import useCars from '../../../../../App/Features/Garage/Hooks/Use-cars-hook';
+import { WinnerWithCarId } from '../../../../../App/Features/Garage/Store/Use-winner-store';
+import { useCallback, useState } from 'react';
+import useWinnersTable from '../../Hooks/Use-winners-table.hook';
+import Table from './Table';
+import { mergeAndSumWins } from '../../../../../common/lib/index';
+import Pagination from '../../../../../common/components/Pagination/Pagination';
 
 export interface WinnerWithName extends WinnerWithCarId {
   carName: string;
@@ -12,27 +13,40 @@ export interface WinnerWithName extends WinnerWithCarId {
 }
 
 function WinnerTable() {
-  const { winners, loading, page, setPage, winnersCount } = useWinnersTable();
+  const { winners, loading } = useWinnersTable();
   const { cars } = useCars();
-  const carName = useCallback((id: number) => cars.find(car => car.id === id)?.name, [cars]);
+  const [page, setPage] = useState(1); // ✅ added
+  const winnersPerPage = 10; // or your API limit / hook value
+
+  const getCarName = useCallback((id: number) => cars.find(car => car.id === id)?.name || '', [cars]);
 
   const winnersWithCarName = mergeAndSumWins(
     winners.map(winner => ({
       ...winner,
-      carName: carName(winner.carId) || ""
-    }))
+      carName: getCarName(winner.carId),
+    })),
   );
 
-  const isThereWinner = winnersWithCarName.length > 0;
+  const totalWinners = winnersWithCarName.length; // ✅ added
+  const pagesLength = Math.ceil(totalWinners / winnersPerPage); // ✅ added
+  const isThereWinner = totalWinners > 0;
+
   return (
-    <div className="min-h-[400px] w-full flex items-center justify-center">
+    <div className="min-h-[400px] w-full flex flex-col items-center justify-center gap-4">
       {loading ? (
         <Loading size={60} />
       ) : isThereWinner ? (
-        <Table page={page} setPage={setPage} winnersCount={winnersCount} winnersWithCarName={winnersWithCarName} />
+        <Table
+          winnersWithCarName={winnersWithCarName}
+          page={page} // ✅ pass down if Table needs it
+          setPage={setPage} // ✅ pass down if Table needs it
+          winnersCount={totalWinners} // ✅ pass down if Table expects it
+        />
       ) : (
         <EmptyTable />
       )}
+
+      {isThereWinner && <Pagination onPageChange={setPage} carsCount={totalWinners} page={page} pagesLength={pagesLength} />}
     </div>
   );
 }

@@ -1,8 +1,8 @@
-import Api from "../../../../api/index";
-import { useCallback } from "react";
-import { Callbacks } from "../../../../common/types";
-import { GetWinnersParams } from "../../../../api/Slices/winners/types";
-import { Winner } from "../../../../api/Slices/winners/entity";
+import Api from '../../../../api/index';
+import { useCallback } from 'react';
+import { Callbacks } from '../../../../common/types';
+import { GetWinnersParams } from '../../../../api/Slices/winners/types';
+import { Winner } from '../../../../api/Slices/winners/entity';
 
 export default function useWinners() {
   const getWinners = useCallback(
@@ -13,15 +13,15 @@ export default function useWinners() {
       if (rsp.meta.error) {
         return {
           error: rsp.meta.error,
-          data: null
+          data: null,
         };
       }
       return {
         error: null,
-        data: rsp.data
+        data: rsp.data,
       };
     },
-    []
+    [],
   );
 
   const getWinner = useCallback(async ({ id, callbacks }: { id: number; callbacks: Callbacks }) => {
@@ -31,28 +31,28 @@ export default function useWinners() {
     if (rsp.meta.error) {
       return {
         error: rsp.meta.error,
-        data: null
+        data: null,
       };
     }
     return {
       error: null,
-      data: rsp.data
+      data: rsp.data,
     };
   }, []);
 
-  const createWinner = useCallback(async ({ winner, callbacks }: { winner: Omit<Winner, "id">; callbacks: Callbacks }) => {
+  const createWinner = useCallback(async ({ winner, callbacks }: { winner: Omit<Winner, 'id'>; callbacks: Callbacks }) => {
     callbacks.beforeAPICall?.();
     const rsp = await Api.winners.CreateWinner(winner);
     callbacks.afterAPICall?.();
     if (rsp.meta.error) {
       return {
         error: rsp.meta.error,
-        data: null
+        data: null,
       };
     }
     return {
       error: null,
-      data: rsp.data
+      data: rsp.data,
     };
   }, []);
 
@@ -63,12 +63,12 @@ export default function useWinners() {
     if (rsp.meta.error) {
       return {
         error: rsp.meta.error,
-        data: null
+        data: null,
       };
     }
     return {
       error: null,
-      data: rsp.data
+      data: rsp.data,
     };
   }, []);
 
@@ -80,15 +80,15 @@ export default function useWinners() {
       if (rsp.meta.error) {
         return {
           error: rsp.meta.error,
-          data: null
+          data: null,
         };
       }
       return {
         error: null,
-        data: rsp.data
+        data: rsp.data,
       };
     },
-    []
+    [],
   );
 
   return { getWinners, getWinner, createWinner, deleteWinner, updateWinner };

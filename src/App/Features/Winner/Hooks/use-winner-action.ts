@@ -1,6 +1,6 @@
-import { useCallback, useState } from "react";
-import useWinners from "./Use-winners";
-import useWinnerStore from "../../Garage/Store/Use-winner-store";
+import { useCallback, useState } from 'react';
+import useWinners from './Use-winners';
+import useWinnerStore from '../../Garage/Store/Use-winner-store';
 
 export default function useWinnerAction() {
   const { createWinner, updateWinner } = useWinners();
@@ -10,7 +10,7 @@ export default function useWinnerAction() {
   const { getWinner, updateWinnerInStore, createWinnerInStore } = useWinnerStore(state => ({
     getWinner: state.getWinner,
     updateWinnerInStore: state.updateWinner,
-    createWinnerInStore: state.createWinner
+    createWinnerInStore: state.createWinner,
   }));
 
   const handleWinnerAction = useCallback(
@@ -26,8 +26,8 @@ export default function useWinnerAction() {
           time: bestTime,
           callbacks: {
             beforeAPICall: () => setLoading(true),
-            afterAPICall: () => setLoading(false)
-          }
+            afterAPICall: () => setLoading(false),
+          },
         });
 
         if (rsp.error) {
@@ -40,8 +40,8 @@ export default function useWinnerAction() {
           winner: { wins: 1, time },
           callbacks: {
             beforeAPICall: () => setLoading(true),
-            afterAPICall: () => setLoading(false)
-          }
+            afterAPICall: () => setLoading(false),
+          },
         });
 
         if (rsp.error) {
@@ -51,7 +51,7 @@ export default function useWinnerAction() {
         }
       }
     },
-    [getWinner, updateWinner, createWinner, updateWinnerInStore, createWinnerInStore]
+    [getWinner, updateWinner, createWinner, updateWinnerInStore, createWinnerInStore],
   );
 
   return { handleWinnerAction, loading, error };

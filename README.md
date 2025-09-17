@@ -54,36 +54,28 @@ npm start
 
 The backend will run on [http://localhost:3000](http://localhost:3000).
 
-## 🏆 Evaluation Checklist
+## 🏆 Self-evaluation
 
 ### Minimum scope
 
-### Minimum scope
-
-- [x] A user can create, update, delete a car (CRUD operations in the garage).
-- [x] Pagination is implemented for the garage (7 cars per page).
-- [x] A user can start a race for all cars on the page.
-- [x] Animation works correctly and corresponds to the real car speed.
-- [x] The race result is recorded and displayed in the winners table.
+- [ ] A user can create, update, delete a car (CRUD operations in the garage).
+- [ ] Pagination is implemented for the garage (7 cars per page).
+- [ ] A user can start a race for all cars on the page.
+- [ ] Animation works correctly and corresponds to the real car speed.
+- [ ] The race result is recorded and displayed in the winners table.
 
 ### Extra scope
 
-- [x] Car engine start/stop is implemented.
-- [x] Reset race button stops all cars.
-- [x] Winner’s time is recorded and displayed.
-- [x] Winners page with pagination is implemented.
-- [x] Sorting of winners by wins and best time is implemented.
+- [ ] Car engine start/stop is implemented.
+- [ ] Reset race button stops all cars.
+- [ ] Winner’s time is recorded and displayed.
+- [ ] Winners page with pagination is implemented.
+- [ ] Sorting of winners by wins and best time is implemented.
 
 ### Technical requirements
 
-- [x] Application is written in **React** + **TypeScript**.
-- [x] State management is handled by **Zustand**.
-- [x] Backend requests are made via **Axios**.
-- [x] Code follows project structure and is well-typed.
-- [x] Application is deployed and accessible online.
-
-### Extra features (optional)
-
-- [x] Modal dialogs for creating/updating cars.
-- [ ] Responsive design for mobile and desktop.
-- [ ] Additional UI/UX improvements.
+- [ ] Application is written in **React** + **TypeScript**.
+- [ ] State management is handled by **Zustand**.
+- [ ] Backend requests are made via **Axios**.
+- [ ] Code follows project structure and is well-typed.
+- [ ] Application is deployed and accessible online.

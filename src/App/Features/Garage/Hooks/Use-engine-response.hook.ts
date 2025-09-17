@@ -1,14 +1,14 @@
-import Api from "../../../../api/index";
-import { EngineStatus } from "../../../../api/Slices/engine/types";
-import { Callbacks } from "../../../../common/types";
-import { useCallback } from "react";
+import Api from '../../../../api/index';
+import { EngineStatus } from '../../../../api/Slices/engine/types';
+import { Callbacks } from '../../../../common/types';
+import { useCallback } from 'react';
 
 export default function useEngineResponse() {
   const patchCarEngine = useCallback(
     async ({
       id,
       status,
-      callbacks
+      callbacks,
     }: {
       id: number;
       status: EngineStatus.started | EngineStatus.stopped;
@@ -20,16 +20,16 @@ export default function useEngineResponse() {
       if (rsp.meta.error) {
         return {
           error: rsp.meta.error,
-          data: null
+          data: null,
         };
       }
 
       return {
         error: null,
-        data: rsp.data
+        data: rsp.data,
       };
     },
-    []
+    [],
   );
 
   const patchEngineStatus = useCallback(async ({ id, callbacks }: { id: number; callbacks: Callbacks }) => {
@@ -39,13 +39,13 @@ export default function useEngineResponse() {
     if (rsp.meta.error) {
       return {
         error: rsp.meta.error,
-        data: null
+        data: null,
       };
     }
 
     return {
       error: null,
-      data: rsp.data
+      data: rsp.data,
     };
   }, []);
 

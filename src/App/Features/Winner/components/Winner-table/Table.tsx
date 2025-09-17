@@ -1,8 +1,7 @@
-import React from "react";
-import TableHead from "./Table-head";
-import { WinnerWithName } from "./Winner-table";
-import TableRow from "./Table-row";
-import Pagination from "../../../../../common/components/Pagination/Pagination";
+import React from 'react';
+import TableHead from './Table-head';
+import { WinnerWithName } from './Winner-table';
+import TableRow from './Table-row';
 
 interface Props {
   winnersWithCarName: WinnerWithName[];
@@ -11,7 +10,7 @@ interface Props {
   winnersCount: number;
 }
 
-const Table = ({ winnersCount, winnersWithCarName }: Props) => {
+const Table = ({ winnersWithCarName }: Props) => {
   return (
     <div>
       <table className="w-[600px] bg-white neon-border shadow-md rounded-lg overflow-hidden">

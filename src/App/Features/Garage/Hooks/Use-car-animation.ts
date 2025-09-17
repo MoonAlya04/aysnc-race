@@ -1,13 +1,14 @@
-import { useCallback, useEffect, useRef } from "react";
-import { EngineStatus } from "../../../../api/Slices/engine/types";
-import { CarCondition } from "../../../../api/Slices/garage/types";
-import useWinnerStore from "../Store/Use-winner-store";
+import { useCallback, useEffect, useRef } from 'react';
+import { EngineStatus } from '../../../../api/Slices/engine/types';
+import { CarCondition } from '../../../../api/Slices/garage/types';
+import useWinnerStore from '../Store/Use-winner-store';
 
 const INCREASE_SPEED = 1;
 const DIVIDER = 1000;
 const ZERO = 0;
 
 interface UseCarAnimationProps {
+  id: number; // unique car id
   status: EngineStatus;
   speed: number;
   condition: CarCondition;
@@ -21,12 +22,13 @@ interface UseCarAnimationResult {
 }
 
 export default function useCarAnimation({
+  id,
   status,
   speed,
   condition,
   initialPosition,
   onReachTheEnd,
-  handlePosition
+  handlePosition,
 }: UseCarAnimationProps): UseCarAnimationResult {
   const positionRef = useRef<number>(initialPosition);
   const animationId = useRef<number | null>(null);
@@ -35,9 +37,17 @@ export default function useCarAnimation({
   const roadLength = useRef<number>(ZERO);
   const isCarStarted = useRef<boolean>(false);
   const startTimeRef = useRef<number | null>(null);
-  const { raceInProgress } = useWinnerStore(state => ({
-    raceInProgress: state.raceInProgress
+
+  // ✅ persist position in store so it survives page change
+  const { raceInProgress, carPositions, setCarPosition } = useWinnerStore(state => ({
+    raceInProgress: state.raceInProgress,
+    carPositions: state.carPositions ?? {},
+    setCarPosition: state.setCarPosition,
   }));
+
+  /**
+   * Frame-by-frame animation update
+   */
   const animate = useCallback(
     (time: number): void => {
       if (previousTimeRef.current !== null && condition === CarCondition.running) {
@@ -48,8 +58,8 @@ export default function useCarAnimation({
 
         positionRef.current = Math.min(newPosition, roadLength.current);
 
+        // Car reached finish
         if (positionRef.current >= roadLength.current) {
-          // elapsed in seconds
           const elapsed = startTimeRef.current !== null ? (time - startTimeRef.current) / DIVIDER : ZERO;
           onReachTheEnd(positionRef.current, +elapsed.toFixed(1));
           return;
@@ -65,22 +75,53 @@ export default function useCarAnimation({
         animationId.current = requestAnimationFrame(animate);
       }
     },
-    [speed, status, onReachTheEnd, condition]
+    [speed, status, condition, onReachTheEnd],
   );
 
+  /**
+   * Calculate road length on resize
+   */
   const handleResize = useCallback((): void => {
     if (carRef.current?.parentElement) {
       roadLength.current = carRef.current.parentElement.scrollWidth - carRef.current.scrollWidth || ZERO;
     }
   }, []);
 
+  /**
+   * Restore car position on mount (from store or initial)
+   */
   useEffect(() => {
-    if (carRef.current?.parentElement) {
-      positionRef.current = initialPosition;
-      carRef.current.style.transform = `translateX(${positionRef.current}px)`;
+    const savedPosition = carPositions[id] ?? initialPosition;
+    positionRef.current = savedPosition;
+    if (carRef.current) {
+      carRef.current.style.transform = `translateX(${savedPosition}px)`;
     }
-  }, [initialPosition]);
+  }, [id, initialPosition, carPositions]);
 
+  /**
+   * Save car position on unmount
+   */
+  useEffect(() => {
+    return () => {
+      setCarPosition(id, positionRef.current);
+    };
+  }, [id, setCarPosition]);
+
+  /**
+   * Reset position only when race stops
+   */
+  useEffect(() => {
+    if (!raceInProgress) {
+      positionRef.current = initialPosition;
+      if (carRef.current) {
+        carRef.current.style.transform = `translateX(${positionRef.current}px)`;
+      }
+    }
+  }, [raceInProgress, initialPosition]);
+
+  /**
+   * Start/stop animation
+   */
   useEffect(() => {
     if (!raceInProgress) {
       if (animationId.current) {
@@ -90,14 +131,14 @@ export default function useCarAnimation({
       return;
     }
 
+    // Calculate road length
     if (carRef.current?.parentElement) {
       roadLength.current = carRef.current.parentElement.scrollWidth - carRef.current.scrollWidth || ZERO;
     }
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     if (status !== EngineStatus.stopped) {
-      // Only set these once, when animation starts
       if (animationId.current === null) {
         previousTimeRef.current = performance.now();
         if (positionRef.current === initialPosition) {
@@ -106,7 +147,7 @@ export default function useCarAnimation({
         animationId.current = requestAnimationFrame(animate);
 
         if (!isCarStarted.current) {
-          handlePosition(1);
+          handlePosition(positionRef.current);
           isCarStarted.current = true;
         }
       }
@@ -114,9 +155,10 @@ export default function useCarAnimation({
       if (condition === CarCondition.broken) {
         handlePosition(positionRef.current);
       } else if (positionRef.current < roadLength.current) {
+        // Reset only if car didn’t finish
         if (carRef.current) {
           positionRef.current = ZERO;
-          carRef.current.style.transform = "translateX(0px)";
+          carRef.current.style.transform = 'translateX(0px)';
         }
       }
 
@@ -128,12 +170,13 @@ export default function useCarAnimation({
     }
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
       if (animationId.current) {
         cancelAnimationFrame(animationId.current);
         animationId.current = null;
       }
     };
   }, [condition, speed, animate, handleResize, status, handlePosition, initialPosition, raceInProgress]);
+
   return { carRef };
 }

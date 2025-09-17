@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import Button from "../Button/Buttons";
+import { useNavigate } from 'react-router-dom';
+import Button from '../Button/Buttons';
 
 function Header() {
   const navigate = useNavigate();
@@ -10,10 +10,10 @@ function Header() {
         <h1>ASYNC RACE</h1>
       </div>
       <div className="flex gap-4">
-        <Button onClick={() => navigate("/")} icon="garage">
+        <Button onClick={() => navigate('/')} icon="garage">
           Garage
         </Button>
-        <Button onClick={() => navigate("/winners")} icon="winner">
+        <Button onClick={() => navigate('/winners')} icon="winner">
           Winner
         </Button>
       </div>

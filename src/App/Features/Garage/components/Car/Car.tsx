@@ -1,10 +1,10 @@
-import { CarCondition } from "../../../../../api/Slices/garage/types";
-import { RaceType } from "../../Store/Use-winner-store";
-import useCarAnimation from "../../Hooks/Use-car-animation";
-import { Car as CarEntity } from "../../../../../api/Slices/garage/entity";
-import { useManageCar } from "../../Hooks/Use-manage-car.hook";
-import { EngineStatus } from "../../../../../api/Slices/engine/types";
-import CarWithWindows from "./Car-icon";
+import { CarCondition } from '../../../../../api/Slices/garage/types';
+import { RaceType } from '../../Store/Use-winner-store';
+import useCarAnimation from '../../Hooks/Use-car-animation';
+import { Car as CarEntity } from '../../../../../api/Slices/garage/entity';
+import { useManageCar } from '../../Hooks/Use-manage-car.hook';
+import { EngineStatus } from '../../../../../api/Slices/engine/types';
+import CarWithWindows from './Car-icon';
 
 interface Props {
   car: CarEntity;
@@ -18,16 +18,17 @@ export default function Car({ car, winnerId, announceWinner, raceType }: Props) 
     id: car.id,
     winnerId,
     announceWinner,
-    raceType
+    raceType,
   });
 
   const { carRef } = useCarAnimation({
+    id: car.id,
     initialPosition: car.position ?? 0,
     speed: car.engine?.velocity ?? 0,
     status: car.engine?.status ?? EngineStatus.stopped,
     condition: carCondition || CarCondition.running,
     onReachTheEnd: carReachTheEnd,
-    handlePosition
+    handlePosition,
   });
 
   return (

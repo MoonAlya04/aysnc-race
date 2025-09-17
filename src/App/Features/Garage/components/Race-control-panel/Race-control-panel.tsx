@@ -1,13 +1,13 @@
-import React, { useCallback } from "react";
-import useGenerateCars from "../../Hooks/Use-generate-cars.hook";
-import CreateCar from "../Garage-actions/Car-actions/Create-car";
-import useManageRace from "../../Hooks/Use-manage-race.hook";
-import Modal from "../../../../../common/components/Modal/Modal";
-import { useBoolean } from "../../../../../common/Hooks/Index.hook";
-import Button from "../../../../../common/components/Button/Buttons";
+import React, { useCallback } from 'react';
+import useGenerateCars from '../../Hooks/Use-generate-cars.hook';
+import CreateCar from '../Garage-actions/Car-actions/Create-car';
+import useManageRace from '../../Hooks/Use-manage-race.hook';
+import Modal from '../../../../../common/components/Modal/Modal';
+import { useBoolean } from '../../../../../common/Hooks/Index.hook';
+import Button from '../../../../../common/components/Button/Buttons';
 
 function RaceControlPanel() {
-  const { canReset, handleAllCarsEngineActions, raceType, resetCars } = useManageRace();
+  const { handleAllCarsEngineActions, resetCars } = useManageRace();
   const { generateCars } = useGenerateCars();
   const { value, setTrue, setFalse } = useBoolean();
 

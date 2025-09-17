@@ -1,15 +1,15 @@
-import { useCallback, useState } from "react";
-import useEngineResponse from "./Use-engine-response.hook";
-import useGarageStore from "../Store/Usa-garage-store";
-import { EngineStatus } from "../../../../api/Slices/engine/types";
-import { CarCondition } from "../../../../api/Slices/garage/types";
+import { useCallback, useState } from 'react';
+import useEngineResponse from './Use-engine-response.hook';
+import useGarageStore from '../Store/Usa-garage-store';
+import { EngineStatus } from '../../../../api/Slices/engine/types';
+import { CarCondition } from '../../../../api/Slices/garage/types';
 
 export function useEngineActions() {
   const { patchCarEngine, patchEngineStatus } = useEngineResponse();
   const { updateCarEngineInStore, updateCarStatus, updateCar } = useGarageStore(state => ({
     updateCarEngineInStore: state.updateCarEngine,
     updateCarStatus: state.updateCarStatus,
-    updateCar: state.updateCar
+    updateCar: state.updateCar,
   }));
 
   const [error, setError] = useState<string | null>(null);
@@ -22,8 +22,8 @@ export function useEngineActions() {
         status,
         callbacks: {
           beforeAPICall: () => setLoading(true),
-          afterAPICall: () => setLoading(false)
-        }
+          afterAPICall: () => setLoading(false),
+        },
       });
 
       if (engineStatusRsp.error) {
@@ -44,8 +44,8 @@ export function useEngineActions() {
           id,
           callbacks: {
             beforeAPICall: () => setLoading(true),
-            afterAPICall: () => setLoading(false)
-          }
+            afterAPICall: () => setLoading(false),
+          },
         });
 
         if (engineRsp.error) {
@@ -61,15 +61,15 @@ export function useEngineActions() {
 
       // safe return: if data is missing, default to stopped
       return {
-        status: engineStatusRsp.data?.status ?? EngineStatus.stopped
+        status: engineStatusRsp.data?.status ?? EngineStatus.stopped,
       };
     },
-    [patchCarEngine, setLoading, setError, updateCarEngineInStore, patchEngineStatus, updateCarStatus, updateCar]
+    [patchCarEngine, setLoading, setError, updateCarEngineInStore, patchEngineStatus, updateCarStatus, updateCar],
   );
 
   return {
     updateCarEngine,
     engineLoading: loading,
-    engineError: error
+    engineError: error,
   };
 }

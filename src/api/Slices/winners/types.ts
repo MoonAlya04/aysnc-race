@@ -5,5 +5,5 @@ export interface GetWinnersParams {
   order?: string;
 }
 
-export type WinnersSort = "id" | "wins" | "time";
-export type WinnersOrder = "asc" | "desc";
+export type WinnersSort = 'id' | 'wins' | 'time';
+export type WinnersOrder = 'asc' | 'desc';
