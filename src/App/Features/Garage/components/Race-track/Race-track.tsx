@@ -18,16 +18,12 @@ const RaceTrack = () => {
 
   const winnerCarName = cars?.find(car => car.id === raceWinnerId)?.name ?? '';
 
-  const winner = raceWinnerId ? getWinner(raceWinnerId) : null;
-
   const winnerCarTime = useMemo(() => {
     if (!raceWinnerId) return '';
     const winner = getWinner(raceWinnerId);
     if (!winner?.time) return '';
     return winner.time.toFixed(2);
   }, [raceWinnerId, getWinner]);
-
-  console.log('winner from RaceTrack:', winner);
 
   const openWinnerModal = showWinner && !!raceWinnerId;
 
